@@ -3,6 +3,27 @@ package Strings.General;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+length(): Returns the length of the string.
+charAt(int index): Returns the character at the specified index.
+substring(int beginIndex): Extracts a substring from the specified index to the end.
+substring(int beginIndex, int endIndex): Extracts a substring from beginIndex to endIndex - 1.
+indexOf(String str): Returns the index of the first occurrence of the specified string.
+lastIndexOf(String str): Returns the index of the last occurrence of the specified string.
+equals(Object obj): Compares the string with another object for equality.
+equalsIgnoreCase(String anotherString): Compares two strings, ignoring case differences.
+compareTo(String anotherString): Compares two strings lexicographically.
+startsWith(String prefix): Checks if the string starts with the specified prefix.
+endsWith(String suffix): Checks if the string ends with the specified suffix.
+toLowerCase(): Converts the string to lowercase.
+toUpperCase(): Converts the string to uppercase.
+trim(): Removes leading and trailing spaces.
+replace(CharSequence target, CharSequence replacement): Replaces all occurrences of a target with a replacement.
+split(String regex): Splits the string based on the specified regular expression.
+matches(String regex): Checks if the string matches the specified regular expression.
+isEmpty(): Checks if the string is empty.
+ */
+
 public class Main {
 
     public static void main(String[] args) {
