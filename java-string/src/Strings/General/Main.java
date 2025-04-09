@@ -4,6 +4,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
+
+String(): Creates an empty string.
+String(byte[] bytes): Constructs a new String by decoding the specified byte array using the platform's default charset.
+String(byte[] bytes, Charset charset): Constructs a new String by decoding the specified byte array using the specified charset.
+String(byte[] bytes, int offset, int length): Constructs a new String by decoding the specified subarray of bytes.
+String(char[] value): Constructs a new String by copying the character array.
+String(char[] value, int offset, int count): Constructs a new String by copying a subset of the character array.
+String(String original): Constructs a new String that is a copy of the original string.
+String(StringBuilder builder): Constructs a new String by copying the contents of the specified StringBuilder.
+String(StringBuffer buffer): Constructs a new String by copying the contents of the specified StringBuffer.
+
 length(): Returns the length of the string.
 charAt(int index): Returns the character at the specified index.
 substring(int beginIndex): Extracts a substring from the specified index to the end.
