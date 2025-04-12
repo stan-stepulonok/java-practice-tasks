@@ -154,7 +154,6 @@ Avoid excessive use of quantifiers like .* to prevent performance issues with lo
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -239,7 +238,7 @@ public class PatternMatcher {
         Input: "Contact us at support@example.com or admin@domain.org."
         Expected Output: ["support@example.com", "admin@domain.org"]
          */
-        System.out.println("Task 6:");
+        System.out.println("Task 5:");
         regex = "\\b[a-zA-Z0-9.-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\\.?[a-zA-Z0-9]*\\b";
         String s5 = "Contact us at support@example.com or admin@domain.org.";
         Pattern p5 = Pattern.compile(regex);
@@ -258,8 +257,9 @@ public class PatternMatcher {
         Expected Output: "Hello world Let s code in Java "
         (Note: You’ll likely use matcher.replaceAll() here)
          */
-        System.out.println("Task 7: Mathcher - relaceAll()");
+        System.out.println("Task 6: Mathcher - relaceAll()");
         regex = "[\\W\\s]+";
+        // regex = "[^A-Za-z]+";
         String s6 = "Hello, world! Let's code in Java 17.";
         Pattern p6 = Pattern.compile(regex);
         Matcher m6 = p6.matcher(s6);
@@ -273,9 +273,10 @@ public class PatternMatcher {
         Input: "Loving the #sunshine and #beach vibes! #vacation"
         Expected Output: ["#sunshine", "#beach", "#vacation"]
          */
-        System.out.println("task 7:");
+        System.out.println("Task 7:");
         String s7 = "Loving the #sunshine and #beach vibes! #vacation";
         regex = "#[A-Za-z0-9]+";
+        // regex = "#[A-Za-z0-9_]+";
         ArrayList<String> hashTags = new ArrayList<>();
         Pattern p7 = Pattern.compile(regex);
         Matcher m7 = p7.matcher(s7);
@@ -286,8 +287,49 @@ public class PatternMatcher {
         System.out.println(hashTags);
         System.out.println();
 
+        /*
+        Task 8 – Check if a string contains a valid date in format YYYY-MM-DD
+        Input: "The deadline is 2025-12-15"
+        Expected Output: true
+        Input: "Date: 2025-13-40"
+        Expected Output: false
+         */
+        System.out.println();
+        String s8 = "The deadline is 2025-12-15";
+        regex = "(([1-9])|([1-9][0-9])|([1-9][0-9]{2})|([1-9][0-9]{3}))-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))";
+        Pattern p8 = Pattern.compile(regex);
+        Matcher m8 = p8.matcher(s8);
+        System.out.println(s8 + " -> " + m8.find());
+        s8 = "Date: 2025-13-40";
+        m8.reset(s8);
+        System.out.println(s8 + " -> " + m8.find());
+        System.out.println();
 
+        /*
+        Task 9 – Find all duplicate words (case-insensitive)
+        Input: "This is is a test Test"
+        Expected Output: ["is", "Test"]
+        (Hint: You’ll probably use (?i)\b(\w+)\b.*\b\1\b with a loop)
+         */
 
+        // ????????
+
+        /*
+        Task 10 – Extract domain names from URLs
+        Input: "Visit https://openai.com and http://example.org now!"
+        Expected Output: ["openai.com", "example.org"]
+         */
+        System.out.println("Task 10");
+        String s10 = "Visit https://openai.com and http://example.org now!";
+        regex = "https?://([a-zA-Z0-9-@+=!#$%]+\\.[a-zA-Z]{1,3}\\.?[a-zA-Z]{0,3})";
+        Pattern p10 = Pattern.compile(regex);
+        Matcher m10 = p10.matcher(s10);
+        ArrayList<String> domains = new ArrayList<>();
+        while (m10.find()) {
+            domains.add(m10.group(1));
+        }
+        System.out.println(domains);
+        System.out.println();
     }
 
 }
