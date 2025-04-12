@@ -109,6 +109,7 @@ public class Main {
         boolean isEqual = s5Upper.equals(s5lower);
         System.out.println("Equal (case-sensitive)? " + isEqual);
         isEqual = s5Upper.equalsIgnoreCase(s5lower);
+        System.out.println(isEqual);
         System.out.println();
 
         /*
