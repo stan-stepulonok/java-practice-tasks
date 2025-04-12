@@ -11,7 +11,7 @@ Main Methods:
 static Pattern compile(String regex): Compiles a regex pattern.
 Matcher matcher(CharSequence input): Creates a matcher for the given input.
 String[] split(CharSequence input): Splits the input around matches of the pattern.
-boolean matches(String regex, CharSequence input): Checks if the entire input matches the regex.
+static boolean matches(String regex, CharSequence input): Checks if the entire input matches the regex.
 String pattern(): Returns the regex as a string.
  */
 
@@ -153,5 +153,141 @@ Use Pattern.compile() for repeated use of the same regex to improve performance.
 Avoid excessive use of quantifiers like .* to prevent performance issues with long inputs.
  */
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PatternMatcher {
+
+    public static void main(String[] args) {
+
+        String regex = "";
+        boolean result;
+
+        /*
+        Task 1 – Find all digits in a string
+        Input: "Order #12345 was shipped on 2024-06-21."
+        Expected Output: ["1", "2", "3", "4", "5", "2", "0", "2", "4", "0", "6", "2", "1"]
+         */
+        System.out.println("Task 1: Matcher");
+        regex = "([\\d])";
+        String s1 = "Order #12345 was shipped on 2024-06-21.";
+        Pattern p1 = Pattern.compile(regex);
+        Matcher m1 = p1.matcher(s1);
+        ArrayList<String> nums1 = new ArrayList<>();
+        while (m1.find()) {
+            nums1.add(m1.group());
+        }
+        System.out.println(s1);
+        System.out.println(nums1);
+        System.out.println();
+
+        /*
+        Task 2 – Extract all words starting with capital letters
+        Input: "Alice went to Wonderland and met the Mad Hatter"
+        Expected Output: ["Alice", "Wonderland", "Mad", "Hatter"]
+         */
+        System.out.println("Task 2: Matcher");
+        regex = "\\b[A-Z]+\\w*\\b";
+        String s2 = "Alice went to Wonderland and met the Mad Hatter";
+        Pattern p2 = Pattern.compile(regex);
+        Matcher m2 = p2.matcher(s2);
+        ArrayList<String> arrList = new ArrayList<>();
+        while (m2.find()) {
+            arrList.add(m2.group());
+        }
+        System.out.println(s2);
+        System.out.println(arrList);
+        System.out.println();
+
+        /*
+        Task 3 – Check if the entire string is a valid IPv4 address
+        Input: "192.168.1.1"
+        Expected Output: true
+        Input: "256.100.10.50"
+        Expected Output: false
+         */
+        System.out.println("Task 3: matches()");
+        //IPv4 addresses are usually represented in dot-decimal notation, consisting of four decimal numbers, each ranging from 0 to 255, separated by dots
+        regex = "^((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}"
+                + "(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)$";
+        String s3 = "192.168.1.1";
+        result = Pattern.matches(regex, s3);
+        System.out.println("regex -> 192.168.1.1 = " + result);
+        System.out.println();
+
+        /*
+        Task 4 – Count how many times "Java" appears as a whole word
+        Input: "Java is fun. I like JavaScript, but Java more."
+        Expected Output: 2
+         */
+        System.out.println("Task 4: ");
+        regex = "\\bjava\\b";
+        String s4 = "Java is fun. I like JavaScript, but Java more.";
+        int javaCount = 0;
+        Pattern p4 = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher m4 = p4.matcher(s4);
+        while (m4.find()) {
+            javaCount++;
+        }
+        System.out.println("Java is fun. I like JavaScript, but Java more. -> Java mentioned " + javaCount + " times.");
+        System.out.println();
+
+        /*
+        Task 5 – Extract email addresses from a paragraph
+        Input: "Contact us at support@example.com or admin@domain.org."
+        Expected Output: ["support@example.com", "admin@domain.org"]
+         */
+        System.out.println("Task 6:");
+        regex = "\\b[a-zA-Z0-9.-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\\.?[a-zA-Z0-9]*\\b";
+        String s5 = "Contact us at support@example.com or admin@domain.org.";
+        Pattern p5 = Pattern.compile(regex);
+        Matcher m5 = p5.matcher(s5);
+        ArrayList<String> emails5 = new ArrayList<>();
+        while (m5.find()) {
+            emails5.add(m5.group());
+        }
+        System.out.println(s5);
+        System.out.println(emails5);
+        System.out.println();
+
+        /*
+        Task 6 – Replace all non-alphabetic characters with space
+        Input: "Hello, world! Let's code in Java 17."
+        Expected Output: "Hello world Let s code in Java "
+        (Note: You’ll likely use matcher.replaceAll() here)
+         */
+        System.out.println("Task 7: Mathcher - relaceAll()");
+        regex = "[\\W\\s]+";
+        String s6 = "Hello, world! Let's code in Java 17.";
+        Pattern p6 = Pattern.compile(regex);
+        Matcher m6 = p6.matcher(s6);
+        String replaced = m6.replaceAll(" ");
+        System.out.println(s6);
+        System.out.println(replaced);
+        System.out.println();
+
+        /*
+        Task 7 – Extract all hashtags from a social media post
+        Input: "Loving the #sunshine and #beach vibes! #vacation"
+        Expected Output: ["#sunshine", "#beach", "#vacation"]
+         */
+        System.out.println("task 7:");
+        String s7 = "Loving the #sunshine and #beach vibes! #vacation";
+        regex = "#[A-Za-z0-9]+";
+        ArrayList<String> hashTags = new ArrayList<>();
+        Pattern p7 = Pattern.compile(regex);
+        Matcher m7 = p7.matcher(s7);
+        while (m7.find()) {
+            hashTags.add(m7.group());
+        }
+        System.out.println(s7);
+        System.out.println(hashTags);
+        System.out.println();
+
+
+
+    }
+
 }
