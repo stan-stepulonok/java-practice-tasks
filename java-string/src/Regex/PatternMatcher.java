@@ -330,6 +330,224 @@ public class PatternMatcher {
         }
         System.out.println(domains);
         System.out.println();
+
+        /*
+        Task 11 – Reuse a Pattern with multiple strings using reset()
+        Input strings: "User: alice" , "User: bob42", "User: carol_smith"
+        Goal: Match the username part only (after "User: "), by reusing the same matcher with reset().
+        Expected Output:
+        alice
+        bob42
+        carol_smith
+        */
+        System.out.println("Task 11: reset()");
+        regex = "^User: ([a-zA-Z0-9_]+)$";
+        String s11 = "User: alice";
+        ArrayList<String> users = new ArrayList<>();
+        Pattern p11 = Pattern.compile(regex);
+        Matcher m11 = p11.matcher(s11);
+        m11.find();
+        users.add(m11.group(1));
+        s11 = "User: bob42";
+        m11.reset(s11).find();
+        users.add(m11.group(1));
+        s11 = "User: carol_smith";
+        m11.reset(s11).find();
+        users.add(m11.group(1));
+        System.out.println(users);
+        System.out.println();
+
+        /*
+        Task 12 – Extract named groups from a full name
+        Input: "Full name: John A. Smith"
+        Goal: Use named groups to extract:
+        First name ( John)
+        Middle initial (optional, like A.)
+        Last name ( Smith)
+         */
+        System.out.println("Task 12: named groups <name>");
+        String s12 = "Full name: John A. Smith";
+        String firstName = "", lastName = "", middleInitial = "";
+        regex = "^Full name: (?<firstName>[A-Za-z]+) (?<middleInitial>[A-Za-z]+.) (?<lastName>[A-Za-z]+)$";
+        //^Full name: (?<firstName>[A-Z][a-z]+)\s(?<middleInitial>[A-Z]\.)?\s(?<lastName>[A-Z][a-z]+)$
+        Pattern p12 = Pattern.compile(regex);
+        Matcher m12 = p12.matcher(s12);
+        if (m12.find()) {
+            firstName = m12.group("firstName");
+            middleInitial = m12.group("middleInitial");
+            lastName = m12.group("lastName");
+        }
+        System.out.println("First name: " + firstName);
+        if (!middleInitial.isEmpty()) {
+            System.out.println("Middle initial: " + middleInitial);
+        }
+        System.out.println("Last name: " + lastName);
+        System.out.println();
+
+        /*
+        Task 13 – Validate password using lookahead
+        Input: "MyPa$$w0rd"
+        Goal: Ensure password has:
+        At least one digit
+        At least one uppercase letter
+        At least one special character ( @#$%^&+=)
+        At least 8 characters
+         */
+        System.out.println("Task 13: positive lookahead");
+        String s13 = "MyPa$$w0rd";
+        regex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+        System.out.println(Pattern.matches(regex, s13));
+        System.out.println();
+
+        /*
+        Task 14 – Find words not preceded by “#” (using negative lookbehind)
+        Input: "Check #this and that and #another"
+        Goal: Find all words that are not hashtags (ie not preceded by #)
+         */
+        System.out.println("Task 14: negative lookbehind");
+        String s14 = "Check #this and that and #another";
+        ArrayList<String> nonTaggedWords = new ArrayList<>();
+        regex = "\\b(?<!#)[A-Za-z]+\\b";
+        Pattern p14 = Pattern.compile(regex);
+        Matcher m14 = p14.matcher(s14);
+        while (m14.find()) {
+            nonTaggedWords.add(m14.group());
+        }
+        System.out.println(nonTaggedWords);
+        System.out.println();
+
+        /*
+        Task 15 – Find prices only followed by a space (using positive lookahead)
+        Input: "Price: $12.50 and discounted $10.00! Not valid: $20.00,"
+        Goal: Extract dollar amounts only when followed by a space (not punctuation)
+         */
+        System.out.println("Task 15: positive lookahead");
+        String s15 = "Price: $12.50 and discounted $10.00! Not valid: $20.00,";
+        regex = "\\$([0-9]+\\.[0-9]{2})(?= )";
+        Pattern p15 = Pattern.compile(regex);
+        Matcher m15 = p15.matcher(s15);
+        ArrayList<Double> prices = new ArrayList<>();
+        while (m15.find()) {
+            prices.add(Double.valueOf(m15.group(1)));
+        }
+        System.out.println(prices);
+        System.out.println();
+
+        /*
+        Task 16 – Extract parts of a phone number using numbered groups
+        Input :"Call me at (123) 456-7890 or at (987) 654-3210"
+        Goal : Extract:
+        Area code
+        First 3 digits
+        Print each match as` Area : 123 , Prefix : 456 , Line :Last 4 digits
+        Print each match as:
+        Area: 123, Prefix: 456, Line: 7890
+         */
+        System.out.println("Task 16:");
+        String s16 = "Call me at (123) 456-7890 or at (987) 654-3210";
+        regex = "\\((\\d{3})\\) (\\d{3})-(\\d{4})";
+        Pattern p16 = Pattern.compile(regex);
+        Matcher m16 = p16.matcher(s16);
+        while (m16.find()) {
+            System.out.println("----- Number: -----");
+            System.out.println("Area: " + m16.group(1));
+            System.out.println("Prefix: " + m16.group(2));
+            System.out.println("Line: " + m16.group(3));
+        }
+        System.out.println();
+
+        /*
+        Task 17 – Use named groups to parse a date
+        Input :"Event is scheduled for 2025-12-31"
+        Goal : Extract year, month, and day using named groups:
+        Year: 2025, Month: 12, Day: 31
+         */
+        System.out.println("Task 17: ");
+        String s17 = "Event is scheduled for 2025-12-31";
+        regex = "(?<year>\\d{4})-(?<month>0[1-9]|1[0-2])-(?<day>0[1-9]|[1-2][0-9]|3[0-1])";
+        Pattern p17 = Pattern.compile(regex);
+        Matcher m17 = p17.matcher(s17);
+        int year = 1980, month = 1, day = 1;
+        if (m17.find()) {
+            year = Integer.valueOf(m17.group("year"));
+            month = Integer.valueOf(m17.group("month"));
+            day = Integer.valueOf(m17.group("day"));
+        }
+        System.out.println("Year: " + year + ", Month: " + month + ", Day: " + day);
+        System.out.println();
+
+        /*
+        Task 18 – Extract all valid variable names using lookaheads and groups
+        Input :"int valid_name = 5; int 9invalid = 2; int _alsoValid = 10;"
+        Goal : Extract only the variable names that:
+        Start with a letter or underscore
+        Followed by letters, digits, or underscores
+        Regex hint : Use a positive lookahead to ensure valid pattern to ensure valid pattern and group to extract the name.
+         */
+        System.out.println("Task 18: lookaheads");
+        String s18 = "int valid_name = 5; int 9invalid = 2; int _alsoValid = 10;";
+        ArrayList<String> validNamedVariables = new ArrayList<>();
+        regex = "(?<variable>\\b(?=[a-z_])[a-zA-Z0-9_]+)\\b ?=";
+        Pattern p18 = Pattern.compile(regex);
+        Matcher m18 = p18.matcher(s18);
+        while (m18.find()) {
+            validNamedVariables.add(m18.group("variable"));
+        }
+        System.out.println(validNamedVariables);
+        System.out.println();
+
+        /*
+        Task 19 – Validate a hex color using lookahead and group capture
+        Input : "#1a2b3c", "#ABCDEF","#12345"
+        Goal : Validate strings that:
+        Start with#
+        Followed by exactly 6 hex digits (a-fA-F0-9)
+        Use a positive lookahead for total length and a numbered group for the color
+        Expected matches:
+        Valid: #1a2b3c
+        Valid: #ABCDEF
+        Invalid: #12345
+         */
+        System.out.println("Task 19: ");
+        String s19Col1 = "#1a2b3c", s19Col2 =  "#ABCDEF", s19Col3 = "#12345";
+        regex = "^#[a-fA-F0-9]{6}$"; //why lookaheads and groups???
+        String resultHexColorCheck1 = "Invalid";
+        if (Pattern.matches(regex, s19Col1)) {
+            resultHexColorCheck1 = "Valid";
+        }
+        System.out.println(resultHexColorCheck1 + ": " + s19Col1);
+        String resultHexColorCheck2 = "Invalid";
+        if (Pattern.matches(regex, s19Col2)) {
+            resultHexColorCheck2 = "Valid";
+        }
+        System.out.println(resultHexColorCheck2 + ": " + s19Col2);
+        String resultHexColorCheck3 = "Invalid";
+        if (Pattern.matches(regex, s19Col3)) {
+            resultHexColorCheck3 = "Valid";
+        }
+        System.out.println(resultHexColorCheck3 + ": " + s19Col3);
+        System.out.println();
+
+        /*
+        Task 20 – Extract all numbers not followed by a % sign (negative lookahead + group)
+        Input :"85% of people agree, 100 voted, 42% disagree, 300 total"
+        Goal : Find numbers not followed by% , eg 100, 300
+        100
+        300
+         */
+        System.out.println("Task 20: ");
+        String s20 = "85% of people agree, 100 voted, 42% disagree, 300 total";
+        regex = "\\b\\d+(?!%)\\b";
+        ArrayList<Integer> nonPercentNumbers = new ArrayList<>();
+        Pattern p20 = Pattern.compile(regex);
+        Matcher m20 = p20.matcher(s20);
+        while (m20.find()) {
+            nonPercentNumbers.add(Integer.valueOf(m20.group()));
+        }
+        System.out.println(nonPercentNumbers);
+        System.out.println();
+
+
     }
 
 }
