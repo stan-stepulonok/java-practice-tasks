@@ -157,14 +157,12 @@ void close() throws IOException
  */
 
 /*
-/*
 Practice Tasks: Byte Streams
 Copy binary file: Use FileInputStream and FileOutputStream to copy an image.
 Buffered performance test: Compare file copy with and without BufferedInputStream/BufferedOutputStream.
 Byte array roundtrip: Read a file into ByteArrayOutputStream, then convert to byte array and print.
 In-memory processing: Read data from ByteArrayInputStream, manipulate bytes, and write with FileOutputStream.
 Write programmatically: Create a ByteArrayOutputStream, write bytes A to Z, and print the result as a String.
-
 -----
 Practice Tasks: Character Streams
 Read a text file: Use FileReader and print characters one by one.
@@ -173,6 +171,84 @@ Write uppercased content: Read a .txt file and write it to another using Buffere
 Char array processing: Use CharArrayWriter to store a string, then read it using CharArrayReader.
 CSV processor: Use FileWriter to write a CSV file, then read it with BufferedReader and print selected columns.
 Reverse lines: Read a file with BufferedReader, reverse each line, and write with BufferedWriter.
+-----
+Byte Stream Tasks
+
+FileInputStream
+
+Task 1: Open a binary file (e.g., PNG or PDF) and read it byte-by-byte using read(); count the total bytes.
+
+Task 2: Use read(byte[] b) to read chunks of 1024 bytes from a file and print the number of bytes read in each iteration.
+
+Task 3: Use read(byte[], int, int) to fill a portion of a byte array with file contents starting from offset 2 and read up to 10 bytes.
+
+BufferedInputStream
+
+Task 1: Wrap a FileInputStream using BufferedInputStream and read the entire file using read(byte[], int, int); measure the time taken using System.nanoTime().
+
+Task 2: Create a BufferedInputStream with a small buffer (e.g., 8 bytes) and compare its performance with a large buffer (e.g., 8192 bytes).
+
+ByteArrayInputStream
+
+Task 1: Convert a string to a byte array and read it byte-by-byte using read(); convert each byte back to character and print.
+
+Task 2: Use read(byte[], int, int) to extract specific portions from a byte array.
+
+Task 3: Read a portion, then call reset() and re-read the data to verify reset functionality.
+
+FileOutputStream
+
+Task 1: Write an array of ASCII characters as bytes into a new file using write(byte[]).
+
+Task 2: Use write(byte[], int, int) to write only the last 5 bytes of an array.
+
+Task 3: Open a file with append=true and add a new line of text to the end.
+
+BufferedOutputStream
+
+Task 1: Write a large byte array (e.g., 10000 bytes) to a file using BufferedOutputStream and observe the use of flush() before closing.
+
+Task 2: Write 3 lines of content and use flush() after each to see intermediate writes reflected in the file.
+
+ByteArrayOutputStream
+
+Task 1: Write several strings converted to byte arrays into the stream, then retrieve the result using toByteArray() and toString().
+
+Task 2: Write bytes, call reset(), then write new content; print final output.
+
+Character Stream Tasks
+
+FileReader
+
+Task 1: Read a .txt file character-by-character using read() and count vowels.
+
+Task 2: Use read(char[]) to read chunks of text into a buffer and print each buffer until EOF.
+
+Task 3: Use read(char[], int, int) to skip the first 2 characters in the buffer and read the next 4.
+
+BufferedReader
+
+Task 1: Read lines of a file using readLine() and print only those that start with a capital letter.
+
+Task 2: Read a file line-by-line and count how many lines contain a specific word (e.g., "Java").
+
+Task 3: Combine read(char[], int, int) to read custom-sized chunks from an input stream wrapped in a BufferedReader.
+
+FileWriter
+
+Task 1: Write a string to a .txt file using write(String).
+
+Task 2: Use write(char[], int, int) to write only a specific section of a character array.
+
+Task 3: Use FileWriter(String, true) to append current date and time to a log file.
+
+BufferedWriter
+
+Task 1: Write multiple lines of a poem to a file using newLine() between lines.
+
+Task 2: Write a paragraph and call flush() after every sentence.
+
+Task 3: Use write(char[], int, int) to write selected words to a file, then close it properly.
  */
 
 
