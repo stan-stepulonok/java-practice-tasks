@@ -2,7 +2,6 @@ package InputOutputStream.ByteArrayInputStream.task2;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 
 /*
 Task 2: Use read(byte[], int, int) to extract specific portions from a byte array.

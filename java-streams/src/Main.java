@@ -40,9 +40,13 @@ void reset()                               // Resets the stream to the beginning
 - Description:
 Writes raw byte data to a file. Used for binary output.
 - Constructors:
+!!!! file created automatically if it doesn't exist !!!!
 FileOutputStream(String name) throws FileNotFoundException                    // File path string.
 FileOutputStream(File file) throws FileNotFoundException                      // File object.
 FileOutputStream(String name, boolean append) throws FileNotFoundException    // Append mode.
+Append Mode:
+FileOutputStream fos = new FileOutputStream("output.txt", true);
+"Open output.txt, and add new data at the end of the file, without erasing what's already there."
 - Main Methods:
 void write(int b) throws IOException        // Writes a single byte.
 void write(byte[] b) throws IOException     // Writes an entire byte array.
@@ -60,6 +64,14 @@ void write(int b) throws IOException
 void write(byte[] b, int off, int len) throws IOException
 void flush() throws IOException             // Flushes the buffer.
 void close() throws IOException
+-->flush() forces any buffered data to be written to the destination (e.g., a file, network socket) immediately.
+When you write data to an output stream (like FileOutputStream or BufferedOutputStream), it doesn't always go directly to the file or destination.
+Instead, it goes into a buffer in memory. This is done for performance reasons — writing to disk or network is slow, so it's more efficient to group data and write it in larger chunks.
+But if you want to make sure the data is actually written right now, you call flush().
+When to Use flush()
+✅ Before closing the stream (usually not needed if you use close() because close() calls flush() internally).
+✅ When you're writing data in parts, and you want the destination to reflect it immediately (e.g., in a network protocol, or if you're writing logs).
+✅ When working with PrintWriter or BufferedWriter, and you want to ensure text is output without closing the stream.
 
 1.6 ByteArrayOutputStream
 - Description:
@@ -98,7 +110,7 @@ Reads text efficiently using a buffer. Provides the readLine() method.
 BufferedReader(Reader in)           // Wraps a Reader.
 BufferedReader(Reader in, int sz)   // With custom buffer size.
 - Main Methods:
-String readLine() throws IOException         // Reads a line of text.
+String readLine() throws IOException         // Reads a line of text !!!! OR NULL if there's nothing else to read
 int read(char[] cbuf, int off, int len) throws IOException
 void close() throws IOException
 
@@ -117,6 +129,7 @@ void close() throws IOException
 - Description:
 Writes characters to a file using default charset.
 - Constructors:
+!!!! file created automatically if it doesn't exist !!!!
 FileWriter(String fileName) throws IOException                       // File path string.
 FileWriter(File file) throws IOException                             // File object.
 FileWriter(String fileName, boolean append) throws IOException       // Append mode.
@@ -235,13 +248,20 @@ Character Stream Tasks
 
 FileReader
 Task 1: Read a .txt file character-by-character using read() and count vowels.
-Task 2: Use read(char[]) to read chunks of text into a buffer and print each buffer until EOF.
+Task 2: Use read(char[]) to read chunks of text into a buffer and print each buffer until EOF (end of file).
 Task 3: Use read(char[], int, int) to skip the first 2 characters in the buffer and read the next 4.
 
 BufferedReader
 Task 1: Read lines of a file using readLine() and print only those that start with a capital letter.
 Task 2: Read a file line-by-line and count how many lines contain a specific word (e.g., "Java").
-Task 3: Combine read(char[], int, int) to read custom-sized chunks from an input stream wrapped in a BufferedReader.
+Task 3: Combine read(char[], int, int) to read custom-sized chunks from an input stream wrapped in a BufferedReader. (TO BE DONE !!!!!!)
+✅ 1. Create a string
+✅ 2. Convert it to a byte array
+✅ 3. Wrap the byte array in a ByteArrayInputStream
+✅ 4. Wrap that with InputStreamReader (byte → char conversion)
+✅ 5. Wrap BufferedReader around InputStreamReader
+✅ 6. Create a char[] buffer and use read(char[], int, int)
+-----> check the structure and PrintWriter
 
 FileWriter
 Task 1: Write a string to a .txt file using write(String).
