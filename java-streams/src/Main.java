@@ -1,4 +1,37 @@
 /*
+----------------------------- 0. Structure -----------------------------
+1. java.lang.Object
+  2. java.io.InputStream
+    3. FileInputStream – Reads bytes from a file. ✅
+    3. ByteArrayInputStream – Reads from a byte array. ✅
+    3. BufferedInputStream – Adds buffering to improve performance. ✅
+    3. ObjectInputStream – Reads Java objects (used in serialization).
+    3. PipedInputStream – Used with PipedOutputStream for thread communication.
+    3. FilterInputStream – The base class for decorators like BufferedInputStream.
+  2. java.io.OutputStream
+    3. FileOutputStream – Writes bytes to a file. ✅
+    3. ByteArrayOutputStream – Writes to a byte array buffer. ✅
+    3. BufferedOutputStream – Buffers output for efficiency. ✅
+    3. ObjectOutputStream – Writes Java objects.
+    3. PipedOutputStream – Sends bytes to a PipedInputStream.
+    3. FilterOutputStream – The base class for decorators like BufferedOutputStream.
+  2. java.io.Reader (implements java.lang.Readable)
+    3. FileReader – Reads characters from a file. ✅
+    3. BufferedReader – Buffers character input; adds readLine(). ✅
+    3. InputStreamReader
+    3. CharArrayReader – Reads from a character array.
+    3. StringReader – Reads characters from a String.
+    3. PipedReader – Reads characters from a PipedWriter.
+    3. FilterReader – Base for decorators.
+  2. java.io.Writer (implements java.lang.Appendable, java.io.Closeable, java.io.Flushable)
+    3. FileWriter – Writes characters to a file. ✅
+    3. BufferedWriter – Buffers characters and provides newLine(). ✅
+    3. OutputStreamWriter
+    3. CharArrayWriter – Writes to a character array.
+    3. StringWriter – Writes characters to a StringBuffer.
+    3. PipedWriter – Sends characters to a PipedReader.
+    3. PrintWriter – Offers convenient printing of text (like System.out).
+
 ----------------------------- 1. InputStream / OutputStream (Byte Streams) -----------------------------
 Common Uses: For reading and writing binary data: images, audio files, PDFs, etc.
 
@@ -167,6 +200,46 @@ char[] toCharArray()
 String toString()
 void reset()
 void close() throws IOException
+
+2.7 InputStreamReader
+- Description:
+InputStreamReader is a bridge between byte streams and character streams.
+It reads bytes from an InputStream (like a file or network input).
+Then decodes those bytes into characters using a specified character encoding (like UTF-8, ISO-8859-1, etc.).
+This makes it very useful when you want to read text from a byte-based source.
+It's the opposite of OutputStreamWriter:
+- InputStreamReader = bytes → characters
+- OutputStreamWriter = characters → bytes
+Simply put: Converts byte-based input (InputStream) into character-based input (Reader).
+- Constructors:
+public InputStreamReader(InputStream in)                                                           // Uses the platform's default charset to decode bytes to characters.
+public InputStreamReader(InputStream in, String charsetName) throws UnsupportedEncodingException   // Uses a named charset to decode (e.g., "UTF-8", "ISO-8859-1").
+public InputStreamReader(InputStream in, Charset cs)                                               // Uses a Charset object (more modern than charset name).
+public InputStreamReader(InputStream in, CharsetDecoder dec)                                       // public InputStreamReader(InputStream in, CharsetDecoder dec)
+- Methods:
+public int read() throws IOException                                      // Reads a single character and returns it as an int; Returns -1 if end of stream is reached.
+public int read(char[] cbuf, int offset, int length) throws IOException   // Reads characters into a portion of an array; Returns the number of characters read or -1 if end of stream.
+public String getEncoding()                                               // Returns the name of the character encoding being used (or null if none).
+public void close() throws IOException                                    // Closes the stream and the underlying InputStream.
+
+2.8 OutputStreamWriter
+- Description:
+Converts character-based output (Writer) into byte-based output (OutputStream). It uses a charset to encode characters into bytes.
+- Constructors:
+public OutputStreamWriter(OutputStream out) // Uses the platform's default charset to encode characters to bytes.
+public OutputStreamWriter(OutputStream out, String charsetName) throws UnsupportedEncodingException // Uses a named charset to encode.
+public OutputStreamWriter(OutputStream out, Charset cs) // Uses a Charset object for encoding.
+public OutputStreamWriter(OutputStream out, CharsetEncoder enc) // Uses a CharsetEncoder to encode with full control over encoding behavior.
+- Methods:
+public void write(int c) throws IOException // Writes a single character.
+public void write(char[] cbuf, int off, int len) throws IOException // Writes a portion of an array of characters.
+public void write(String str, int off, int len) throws IOException // Writes a portion of a string.
+public void flush() throws IOException // Flushes the stream buffer – forces any buffered output bytes to be written out.
+public void close() throws IOException // Closes the stream and the underlying OutputStream.
+public String getEncoding() // public String getEncoding()
+
+
+
  */
 
 /*
@@ -272,6 +345,10 @@ BufferedWriter
 Task 1: Write multiple lines of a poem to a file using newLine() between lines.
 Task 2: Write a paragraph and call flush() after every sentence.
 Task 3: Use write(char[], int, int) to write selected words to a file, then close it properly.
+
+InputStreamReader
+OutputStreamWriter
+
  */
 
 public class Main {
