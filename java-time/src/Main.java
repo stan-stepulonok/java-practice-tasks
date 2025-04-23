@@ -19,6 +19,52 @@ Object
 
 Date/Time API
 Implement the Temporal or TemporalAccessor interfaces to handle date-time operations
+
+Temporal -> objects that implement the Temporal interface
+  - LocalDateTime - Date and time without timezone	LocalDateTime.of(2024, 4, 20, 10, 0)
+  - ZonedDateTime - Date and time with timezone	ZonedDateTime.now(ZoneId.of("UTC"))
+  - OffsetDateTime - Date and time with offset from UTC	OffsetDateTime.now()
+  - Instant - A moment on the timeline in UTC	Instant.now()
+  - LocalTime - Time without date or timezone	✅ But only if paired with same base
+  - OffsetTime - Time with offset from UTC	✅ Same as above
+
+ChronoLocalDate is an interface in the Java java.time.chrono package.
+It represents a date without time or timezone, similar to LocalDate, but with support for different calendar systems — not just the default ISO (Gregorian) calendar.
+
+TemporalAccessor is an interface in the java.time.temporal package that provides a read-only view of date-time objects.
+A general interface that allows you to access fields of a date-time (like year, month, day, hour...), but not modify them.
+Implementations:
+- LocalDate - Date without time
+- LocalDateTime - Date with time
+- ZonedDateTime - Date-time with a time-zone
+- OffsetDateTime - Date-time with an offset from UTC
+- Instant - A timestamp
+- Year, MonthDay, LocalTime - Partial representations
+Methods:
+- boolean isSupported(TemporalField field) → Checks if a certain field (like ChronoField.YEAR) is supported.
+- long getLong(TemporalField field) → Gets the value of a supported field.
+- int get(TemporalField field) → Like getLong() but returns int.
+
+DayOfWeek is an enum in the java.time
+- DayOfWeek.MONDAY
+- DayOfWeek.TUESDAY
+- DayOfWeek.WEDNESDAY
+- DayOfWeek.THURSDAY
+- DayOfWeek.FRIDAY
+- DayOfWeek.SATURDAY
+- DayOfWeek.SUNDAY
+Each value has an associated int from 1 (Monday) to 7 (Sunday), following the ISO-8601 standard.
+- int getValue() - Returns 1–7 for Monday–Sunday
+- String name() - Returns the name (e.g., "MONDAY")
+- DayOfWeek plus(long days) - Adds days to current day
+- DayOfWeek minus(long days) - Subtracts days from current day
+- static DayOfWeek of(int dayOfWeek) - Returns DayOfWeek from int (1–7)
+- static DayOfWeek from(TemporalAccessor) - Gets the day from another date/time object
+
+ChronoUnit: Time Measurement Units -> Represents units of time: days, months, hours, etc.
+DayOfWeek: Enumerates the Days (Monday to Sunday) -> Represents named days of the week. Used for checking or manipulating day-specific logic (like checking if a day is SUNDAY, or moving to MONDAY).
+
+
  */
 
 /*
@@ -109,6 +155,9 @@ static ZoneId systemDefault() -> Gets system default zone
   "GMT"
   "Etc/UTC"
   "Etc/GMT"
+- Offsets:
+  "+02:00"
+  "-05:00"
 - 🇺🇸 America
   "America/New_York"
   "America/Los_Angeles"
@@ -291,10 +340,8 @@ Example Patterns:
 ------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
-
 /*
-/*
-ChronoUnit
+---------------------------------------------- ChronoUnit ----------------------------------------------
 
 ChronoUnit is an enum in the java.time package that provides constants for various units of time, such as days, hours, minutes, years, etc.
 
@@ -314,35 +361,11 @@ Example of methods:
 LocalDate startDate = LocalDate.of(2025, 1, 1);
 LocalDate endDate = LocalDate.of(2025, 12, 31);
 long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
-
 /*
-ZoneId
-
-1. ZoneId objects:
-ZoneId systemZone = ZoneId.systemDefault();
-ZoneId parisZone = ZoneId.of("Europe/Paris");
-
-2. ZoneId + ZonedDateTime:
-ZonedDateTime parisTime = ZonedDateTime.now(parisZone);
-
-3. Recommended zones:
-"Europe/Paris"
-"America/New_York"
-"Asia/Tokyo"
-"Europe/London"
-
-Offsets:
-"+02:00"
-"-05:00"
-
-Names:
-"UTC"
- */
-
-/*
-1. TemporalAdjusters
+---------------------------------------------- TemporalAdjusters ----------------------------------------------
 
 Utility class with static methods.
 
@@ -373,8 +396,7 @@ SUNDAY (7)
 public int getValue() -> returns the number
 public static DayOfWeek of(int dayOfWeek) -> Returns the DayOfWeek corresponding to the given integer value. The value must be between 1 and 7.
 public DayOfWeek plus(long days) / minus(long days) -> Returns the day-of-week that is the specified number of days after this one, wrapping around as necessary. For example, DayOfWeek.FRIDAY.plus(3) will result in DayOfWeek.MONDAY.
-
-DayOfWeek enum defines seven constants:
+------------------------------------------------------------------------------------------------------------------------------------------------
  */
 
 public class Main {
