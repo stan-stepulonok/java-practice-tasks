@@ -64,7 +64,32 @@ Each value has an associated int from 1 (Monday) to 7 (Sunday), following the IS
 ChronoUnit: Time Measurement Units -> Represents units of time: days, months, hours, etc.
 DayOfWeek: Enumerates the Days (Monday to Sunday) -> Represents named days of the week. Used for checking or manipulating day-specific logic (like checking if a day is SUNDAY, or moving to MONDAY).
 
+Month is an enum in the java.time package:
+public enum Month {
+    JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
+    JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+}
+- getValue() → returns int (1–12)
+- plus(long months) → returns a new Month after adding months
+- minus(long months) → subtracts months
+- length(boolean leapYear) → returns number of days in that month
+- firstDayOfYear(boolean leapYear) → day-of-year when that month starts
 
+with() Method — Overview ->
+- The with() method belongs to the Temporal interface
+- It returns a copy of the original object, with one field changed (but all other fields preserved).
+Methods:
+- public LocalDate withYear(int year)
+- public LocalDate withMonth(int month)                       // 1 to 12
+- public LocalDate withDayOfMonth(int dayOfMonth)             // 1 to 31
+- public LocalDate withDayOfYear(int dayOfYear)               // 1 to 365 (or 366 leap year)
+- public LocalDate with(TemporalAdjuster adjuster)            // LocalDate firstMonday = date.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+- public LocalDate with(TemporalField field, long newValue)   // LocalDate changedYear = date.with(ChronoField.YEAR, 2000);
+Example:
+LocalDate original = LocalDate.now();
+Option 1: LocalDate newYear = original.withYear(2000);       // changes year
+Option 2: LocalDate newDate = original.with(ChronoField.YEAR, 2000);
+Option 3: LocalDate newDate = original.with(TemporalAdjusters.firstDayOfMonth());
  */
 
 /*
@@ -83,7 +108,15 @@ LocalDate plusDays(long daysToAdd) - Returns a copy of this date with the specif
 LocalDate minusDays(long daysToSubtract) - Returns a copy of this date with the specified number of days subtracted.
 boolean isBefore(LocalDate other) - Checks if this date is before the specified date.
 boolean isAfter(LocalDate other) - Checks if this date is after the specified date.
+public boolean isLeapYear() - check if the year is leap
 String format(DateTimeFormatter formatter) - Formats this date using the specified formatter.
+
+Component	Method	Returns
+Day of week - getDayOfWeek() - DayOfWeek enum (MONDAY, etc.)
+Day of month - getDayOfMonth() - int (1–31)
+Day of year - getDayOfYear() - int (1–366)
+Month - getMonth() - Month enum (JANUARY, etc.)
+Year - getYear() - int (e.g., 2025)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
