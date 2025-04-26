@@ -133,6 +133,11 @@ static LocalTime parse(CharSequence text, DateTimeFormatter formatter) -> allows
 
 LocalTime plusHours(long hoursToAdd) - Returns a copy of this time with the specified hours added.
 LocalTime minusMinutes(long minutesToSubtract) - Returns a copy of this time with the specified minutes subtracted.
+
+Fields constants:
+ - LocalTime.MIDNIGHT - Exactly midnight - 00:00 (00 hours, 00 minutes)
+ - LocalTime.NOON - Exactly noon - 12:00 (12 hours, 00 minutes)
+ - LocalTime.MAX - The maximum possible time value - 23:59:59.999999999 (just before the next day)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
@@ -303,6 +308,16 @@ Period plusYears(long yearsToAdd) - Returns a copy of this period with the speci
 int getDays()
 int getYears() - Returns the number of years in this period.
 int getMonths() - Returns the number of months in this period.
+
+Period VS Duration
+                 - Period                                       - Duration
+What it measures - Date-based amount (like years, months, days) - Time-based amount (like hours, minutes, seconds, nanoseconds)
+Best for	     - Dates (e.g., LocalDate)	                    - Times (e.g., LocalDateTime, Instant)
+Example	         - "2 years, 3 months, and 5 days"	            - "5 hours, 30 minutes, and 15 seconds"
+Created by	     - Period.between(startDate, endDate)	        - Duration.between(startDateTime, endDateTime)
+Can you get total
+days directly?	 - ❌ (Period separates years/months/days)	    - ✅ (Duration can be converted to total seconds, minutes, hours, etc.)
+Classes 	     - LocalDate, YearMonth, etc. (date-only)	    - Instant, LocalDateTime, OffsetDateTime (date+time)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
@@ -360,6 +375,18 @@ Timezone (z, Z)
 z: Abbreviated timezone (e.g., PST, UTC)
 Z: Full timezone offset (e.g., +02:00, -0800)
 
+Day:
+EE: short day name
+EEEE: full day name
+
+Zone Offset (+02:00, -05:00, etc.)
+➡️ Pattern symbol: XX
+✅ Example output: +02:00, -05:00
+
+Zone Name (Europe/Berlin, America/New_York, etc.)
+➡️ Pattern symbol: VV
+✅ Example output: Europe/Berlin, America/New_York
+
 Literal Characters
 
 Any other characters in the pattern string are treated as literals, so -, /, or : are treated as separators in the format.
@@ -370,6 +397,10 @@ Example Patterns:
 "yyyy/MM/dd HH:mm:ss": Formats as 2025/01/28 16:53:44
 "yyyy MMM dd": Formats as 2025 Jan 28
 "yyyy-MM-dd'T'HH:mm:ss.SSS": Formats as 2025-01-28T16:53:44.280
+
+Full String example (with extra words, we use ''):
+        String pattern14 = "'Today is' EEEE, d 'of' MMMM yyyy 'at' HH:mm";
+        DateTimeFormatter ftf14 = DateTimeFormatter.ofPattern(pattern14);
 ------------------------------------------------------------------------------------------------------------------------------------------------
 */
 

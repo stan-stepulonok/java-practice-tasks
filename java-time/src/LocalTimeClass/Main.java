@@ -1,6 +1,7 @@
 package LocalTimeClass;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 public class Main {
 
@@ -60,6 +61,7 @@ public class Main {
         int second = lt4.getSecond();
         int nano = lt4.getNano();
         System.out.println("Time: " + lt4);
+        System.out.println("Truncated time: " + lt4.truncatedTo(ChronoUnit.SECONDS));
         System.out.println("Hour: " + hour);
         System.out.println("Minute: " + minute);
         System.out.println("Second: " + second);
@@ -104,8 +106,74 @@ public class Main {
         System.out.println(lt6 + " equals " + lt6Comp + " ? ... " + compResultBool);
         System.out.println();
 
+        /*
+        Task 7: Use with() to Change Time
+        Task: From 21:45:00:
+        Change the hour to 9
+        Change the minute to 0
+        Expected Output Example:
+        Original: 21:45:00
+        Modified: 09:00:00
+         */
+        System.out.println("Task 7: ");
+        String time7 = "21:45:00";
+        LocalTime lt7 = LocalTime.parse(time7);
+        LocalTime lt7Modif = lt7.withHour(9).withMinute(0);
+        System.out.println("Original: " + lt7);
+        System.out.println("Modified: " + lt7Modif);
+        System.out.println();
 
+        /*
+        Task 8: Truncate and Round
+        Task: Use truncatedTo(ChronoUnit.MINUTES) on the current time.
+        Then try truncatedTo(ChronoUnit.HOURS).
+        Expected Output Example:
+        Current time: 14:37:55.387
+        Truncated to minutes: 14:37
+        Truncated to hours: 14:00
+         */
+        System.out.println("Task 8: ");
+        LocalTime lt8 = LocalTime.now();
+        System.out.println("Original: " + lt8);
+        System.out.println("Original truncated: " + lt8.truncatedTo(ChronoUnit.SECONDS));
+        LocalTime lt8TruncSeconds = lt8.truncatedTo(ChronoUnit.SECONDS);
+        System.out.println("Truncated to seconds: " + lt8TruncSeconds);
+        LocalTime lt8TruncMinutes = lt8.truncatedTo(ChronoUnit.MINUTES);
+        System.out.println("Truncated to minutes: " + lt8TruncMinutes);
+        LocalTime lt8TruncHours = lt8.truncatedTo(ChronoUnit.HOURS);
+        System.out.println("Truncated to  hours: " + lt8TruncHours);
+        System.out.println();
 
+        /*
+        Task 9: Duration Between Times
+        Task: Find the number of seconds between 08:00:00 and 12:30:00 using ChronoUnit.SECONDS.
+        Expected Output Example:
+        Seconds between: 16200
+         */
+        System.out.println("Task 9: ");
+        LocalTime lt9Before = LocalTime.of(8, 0, 0);
+        LocalTime lt9After = LocalTime.of(12, 30, 0);
+        long secondsBetween = ChronoUnit.SECONDS.between(lt9Before, lt9After);
+        System.out.println("Seconds between " + lt9Before + " and " + lt9After + " are -> " + secondsBetween);
+        System.out.println();
+
+        /*
+        Task 10: Midnight and Max Time
+        Task: Print LocalTime.MIDNIGHT, LocalTime.NOON, and LocalTime.MAX.
+        Expected Output:
+        MIDNIGHT: 00:00
+        NOON: 12:00
+        MAX: 23:59:59.999999999
+         */
+        System.out.println("Task 10: ");
+        LocalTime midnight = LocalTime.MIDNIGHT;
+        System.out.println("Midnight: " + midnight);
+        LocalTime noon = LocalTime.NOON;
+        System.out.println("Noon: " + noon);
+        LocalTime max = LocalTime.MAX;
+        System.out.println("Max: " + max);
+        System.out.println("Max truncated: " + max.truncatedTo(ChronoUnit.SECONDS));
+        System.out.println();
     }
 
 }
