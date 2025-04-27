@@ -236,6 +236,30 @@ public static Instant ofEpochMilli(long epochMilli);
 public static Instant parse(CharSequence text);
 
 Plus-Minus:
+Instant works differently than LocalDate, LocalDateTime, etc.
+It doesn't have .plusDays(), .plusHours(), .plusMonths() methods directly.
+So to add time to an Instant, you use plus(long amountToAdd, TemporalUnit unit).
+TemporalUnit ->
+TemporalUnit (ChronoUnit)	Description
+- ChronoUnit.NANOS	Nanoseconds
+- ChronoUnit.MICROS	Microseconds
+- ChronoUnit.MILLIS	Milliseconds
+- ChronoUnit.SECONDS	Seconds
+- ChronoUnit.MINUTES	Minutes
+- ChronoUnit.HOURS	Hours
+- ChronoUnit.HALF_DAYS	Half-days (12 hours)
+- ChronoUnit.DAYS	Days
+- ChronoUnit.WEEKS	Weeks
+- ChronoUnit.MONTHS	Months
+- ChronoUnit.YEARS	Years
+- ChronoUnit.DECADES	Decades (10 years)
+- ChronoUnit.CENTURIES	Centuries (100 years)
+- ChronoUnit.MILLENNIA	Millennia (1000 years)
+- ChronoUnit.ERAS	Eras (e.g., BC, AD)
+Some TemporalUnits like ChronoUnit.MONTHS, YEARS, WEEKS don't make sense for Instant, because an Instant doesn't know about months or leap years.
+It will still work, but "a month" will be calculated as 30 days = 30×24×60×60 seconds.
+Instant is purely time-based, so DAYS, HOURS, MINUTES, SECONDS are most natural.
+
 public Instant plus(long amountToAdd, TemporalUnit unit);
 public Instant plusSeconds(long secondsToAdd);
 public Instant plusMillis(long millisToAdd);
@@ -291,6 +315,16 @@ public long toSeconds();
 public long toMillis();
 public long toNanos();
 public String toString();
+
+Duration -> PT2H (ISO-8601 format):
+- P stands for Period (used to denote durations).
+- T separates the date part (if applicable) from the time part. In this case, there's no date part, so the T just marks the start of the time part.
+- 2H means 2 hours.
+So, PT2H represents a Duration of 2 hours.
+PT15M — 15 minutes
+PT30S — 30 seconds
+P1Y2M — 1 year and 2 months
+P2D — 2 days
 ------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
@@ -380,8 +414,9 @@ EE: short day name
 EEEE: full day name
 
 Zone Offset (+02:00, -05:00, etc.)
-➡️ Pattern symbol: XX
-✅ Example output: +02:00, -05:00
+Pattern symbol:
+XX -> +0200
+XXX -> +02:00, -05:00
 
 Zone Name (Europe/Berlin, America/New_York, etc.)
 ➡️ Pattern symbol: VV

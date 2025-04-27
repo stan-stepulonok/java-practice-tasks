@@ -198,6 +198,12 @@ public class Main {
         "2025-12-31T23:00:00+02:00[Europe/Kyiv]"
         Parse it into a ZonedDateTime object.
          */
+            // "2025-12-31T23:00:00+02:00[Europe/Kyiv]" standard ISO format.
+            System.out.println("Task 8: ");
+            String zdtStr8 = "2025-12-31T23:00:00+02:00[Europe/Kyiv]";
+            ZonedDateTime zdt8 = ZonedDateTime.parse(zdtStr8);
+            System.out.println(zdt8);
+            System.out.println();
 
         /*
         Task 9:Find all zones with a UTC +5 offset at a given moment
@@ -208,8 +214,18 @@ public class Main {
         Asia / Yekaterinburg
         Indian / Kerguelen
          */
-
-
+            System.out.println("Task 9: ");
+            Instant now = Instant.now();
+            Set<String> allZones = ZoneId.getAvailableZoneIds();
+            for (String zoneIdStr : allZones) {
+                    ZoneId zoneId9 = ZoneId.of(zoneIdStr);
+                    ZonedDateTime zdt9 = now.atZone(zoneId9);
+                    ZoneOffset offset9 = zdt9.getOffset();
+                    if (offset9.equals(ZoneOffset.ofHours(5))) {
+                            System.out.println(zoneId9);
+                    }
+            }
+            System.out.println();
 
         /*
         Task 10:Compare two ZonedDateTime objects
@@ -221,7 +237,130 @@ public class Main {
         ✅Expected:
         A is equal to B
          */
+            System.out.println("Task 10: ");
+            String zdt10aStr = "2025-04-26T10:00+02:00[Europe/Berlin]";
+            String zdt10bStr = "2025-04-26T08:00Z[UTC]";
+            ZonedDateTime zdt10a = ZonedDateTime.parse(zdt10aStr);
+            ZonedDateTime zdt10b = ZonedDateTime.parse(zdt10bStr);
+            int compResult = zdt10a.compareTo(zdt10b);
+            if (compResult == 0) System.out.println("ZonedDateTime are equal!");
+            else System.out.println("ZonedDateTime are not equal!");
+            System.out.println();
 
+            /*
+            Task 11: Create ZonedDateTime in Different Ways
+            Create three ZonedDateTime objects:
+            One for now in your system default time zone.
+            One for now in the "America/New_York" time zone.
+            One for a specific date and time: 2023-12-25 15:30, in the "Asia/Tokyo" time zone.
+            Print each of them nicely (use DateTimeFormatter to show full date and time with zone).
+             */
+            System.out.println("Task 11: ");
+            // now, default system zone
+            ZonedDateTime zdt11Now = ZonedDateTime.now();
+            System.out.println("Raw -> Current zoned time system: " + zdt11Now);
+            // new york
+            LocalTime lt11 = LocalTime.now();
+            LocalDate ld11 = LocalDate.now();
+            ZoneId nyZone11 = ZoneId.of("America/New_York");
+            ZonedDateTime zdt11Ny = ZonedDateTime.of(ld11, lt11, nyZone11);
+            System.out.println("Raw -> Current zoned time NY: " + zdt11Ny);
+            // tokyo specific
+            ZoneId tokZone11 = ZoneId.of("Asia/Tokyo");
+            ZonedDateTime zdt11Tok = ZonedDateTime.of(2023, 12, 25, 15, 30, 0,0,  tokZone11);
+            System.out.println("Raw -> Current zoned time Tok: " + zdt11Tok);
+            // format
+            String pattern11 = "'Year: ' yyyy '; Month: ' MM '; Day: ' dd '; Hour: ' HH '; Minute: ' mm '; Offset: ' XX '; Zone: ' VV";
+            DateTimeFormatter dtf11 = DateTimeFormatter.ofPattern(pattern11);
+            String localPretty = zdt11Now.format(dtf11);
+            String nyPretty = zdt11Ny.format(dtf11);
+            String tokPretty = zdt11Tok.format(dtf11);
+            System.out.println("Pretty -> Current zoned time system: " + localPretty);
+            System.out.println("Pretty -> Current zoned time Tok: " + nyPretty);
+            System.out.println("Pretty -> Current zoned time Tok: " + tokPretty);
+            System.out.println();
+
+            /*
+            Task 12: Add and Subtract Time Across Zones
+            Take a ZonedDateTime of now in "Europe/London".
+            Add 5 hours and subtract 2 days.
+            Then convert (with withZoneSameInstant) this updated time to "Australia/Sydney" and "America/Los_Angeles".
+            Print all results.
+            Observe and explain the differences in hours between zones.
+             */
+            System.out.println("Task 12: ");
+
+            String zoneName = "Europe/London";
+            ZoneId zone12Lond = ZoneId.of(zoneName);
+            ZonedDateTime zdt12Lond = ZonedDateTime.now(zone12Lond);
+            System.out.println("London original: " + zdt12Lond);
+
+            ZonedDateTime zdt12LondModif = zdt12Lond.plusHours(5).minusDays(2);
+            System.out.println("London modified: " + zdt12LondModif);
+
+            Instant lond12ToInst = zdt12LondModif.toInstant();
+
+            ZoneId zone12Aus = ZoneId.of("Australia/Sydney");
+            ZonedDateTime zdt12Austr = ZonedDateTime.ofInstant(lond12ToInst, zone12Aus);
+            System.out.println("Australia modified: " + zdt12Austr);
+            ZoneId zone12La = ZoneId.of("America/Los_Angeles");
+            ZonedDateTime zdt12La = ZonedDateTime.ofInstant(lond12ToInst, zone12La);
+            System.out.println("Australia modified: " + zdt12La);
+            System.out.println();
+
+            /*
+            Task 13: Parse and Format ZonedDateTime Strings
+            Given the string "2025-04-26T10:15:30+02:00[Europe/Paris]", parse it into a ZonedDateTime.
+            Then format it in 3 styles:
+            ISO format (DateTimeFormatter.ISO_ZONED_DATE_TIME)
+            Custom format like "dd MMM yyyy HH:mm:ss z"
+            Only date and time without zone (example: "yyyy-MM-dd HH:mm:ss")
+             */
+            System.out.println("Task 13");
+            String zdtToParse = "2025-04-26T10:15:30+02:00[Europe/Paris]";
+            ZonedDateTime zdt13 = ZonedDateTime.parse(zdtToParse);
+
+            String formatted;
+
+            DateTimeFormatter dtf13iso = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+            formatted = zdt13.format(dtf13iso);
+            System.out.println("ISO -> " + formatted);
+
+            String pattern13 = "dd MMM yyyy HH:mm:ss z";
+            DateTimeFormatter dtf13custom = DateTimeFormatter.ofPattern(pattern13);
+            formatted = zdt13.format(dtf13custom);
+            System.out.println("Custom -> " + formatted);
+
+            pattern13 = "yyyy-MM-dd HH:mm:ss";
+            DateTimeFormatter dtf13short = DateTimeFormatter.ofPattern(pattern13);
+            formatted = zdt13.format(dtf13short);
+            System.out.println("Short -> " + formatted);
+            System.out.println();
+
+            /*
+            Task 14: Compare ZonedDateTime Moments
+            Create two ZonedDateTime instances:
+            One in "Asia/Kolkata" at 2025-01-01 10:00.
+            One in "Europe/Paris" at 2025-01-01 5:00.
+            Check if they represent the same instant in time (hint: use isEqual).
+            Also, check if the first is before or after the second (hint: use isBefore and isAfter).
+             */
+            System.out.println("Task 14: ");
+
+            LocalTime lt14Ten = LocalTime.parse("10:00");
+            LocalTime lt14Five = LocalTime.parse("05:00");
+            LocalDate ld14 = LocalDate.parse("2025-01-01");
+
+            ZoneId zone14Kolk = ZoneId.of("Asia/Kolkata");
+            ZoneId zone14Par = ZoneId.of("Europe/Paris");
+
+            ZonedDateTime zdt14Kolk = ZonedDateTime.of(ld14, lt14Ten, zone14Kolk);
+            ZonedDateTime zdt14Par = ZonedDateTime.of(ld14, lt14Five, zone14Par);
+
+            System.out.println("Asia/Kolkata at 2025-01-01 10:00 before Europe/Paris at 2025-01-01 5:00? ... " + zdt14Kolk.isBefore(zdt14Par));
+            System.out.println("Asia/Kolkata at 2025-01-01 10:00 after Europe/Paris at 2025-01-01 5:00? ... " + zdt14Kolk.isAfter(zdt14Par));
+            System.out.println("Asia/Kolkata at 2025-01-01 10:00 equals Europe/Paris at 2025-01-01 5:00? ... " + zdt14Kolk.isEqual(zdt14Par));
+            System.out.println();
 
     }
 
