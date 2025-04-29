@@ -465,8 +465,25 @@ long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
 
 /*
 ---------------------------------------------- TemporalAdjusters ----------------------------------------------
+!!! TemporalAdjuster VS TemporalAdjusterS !!!
 
-Utility class with static methods.
+1. TemporalAdjuster (interface)
+- This is a functional interface. It represents any logic that adjusts a temporal object (like LocalDate, ZonedDateTime, etc.).
+- You can:
+    - Use existing implementations (like from TemporalAdjusters)
+    - Or define your own via lambda or class.
+- TemporalAdjuster adjuster = temporal -> temporal.plusDays(10);
+
+2. TemporalAdjusters (class)
+- Utility class with static methods.
+- This is a final class with static factory methods.
+- It returns commonly used TemporalAdjuster instances.
+
+3. Use together
+- You get a TemporalAdjuster from TemporalAdjusters, and apply it using .with()
+TemporalAdjuster ta1 = TemporalAdjusters.firstDayOfMonth();
+LocalDate today = LocalDate.now();
+LocalDate firstOfMonth = today.with(ta1);
 
 Usage:
 The method with(TemporalAdjuster adjuster) in LocalDate applies an adjuster to return a modified date.
