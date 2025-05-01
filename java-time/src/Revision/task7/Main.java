@@ -19,7 +19,7 @@ public class Main {
         LocalDateTime ldtBase = LocalDateTime.of(2025, 12, 28, 22, 13, 5);
         System.out.println("LocalDateTime Before: " + ldtBase);
 
-        LocalDateTime ldtModif = ldtBase.plusMonths(6).plusWeeks(2);
+        LocalDateTime ldtModif = ldtBase.plusMonths(6).minusWeeks(2);
         System.out.println("LocalDateTime Modified: " + ldtModif);
 
     }
