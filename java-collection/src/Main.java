@@ -61,68 +61,48 @@ Constructors:
 private Collections() - The constructor is private, meaning you cannot instantiate this class. It's a utility class with only static methods.
 
 Methods:
-1. Sorting and Shuffling
-public static <T extends Comparable<? super T>> void sort(List<T> list)
-public static <T> void sort(List<T> list, Comparator<? super T> c)
-public static void reverse(List<?> list)
-public static void shuffle(List<?> list)
-public static void shuffle(List<?> list, Random rnd)
-public static void rotate(List<?> list, int distance)
-public static void swap(List<?> list, int i, int j)
-public static void fill(List<? super T> list, T obj)
-public static <T> void copy(List<? super T> dest, List<? extends T> src)
+1. Sorting & Shuffling
+sort(List<T> list) - void - Sorts the list in natural order (T must implement Comparable).
+sort(List<T> list, Comparator<? super T> c) - void - Sorts the list using the given comparator.
+shuffle(List<?> list) - void - Randomly permutes the list.
+shuffle(List<?> list, Random rnd) - void - Shuffles using the provided Random object.
+reverse(List<?> list) - void - Reverses the order of the list.
+rotate(List<?> list, int distance) - void - Rotates elements by the given distance.
+swap(List<?> list, int i, int j) - void - Swaps elements at positions i and j.
 
-2. Searching and Min/Max
-public static int binarySearch(List<?> list, Object key)
-public static <T> int binarySearch(List<? extends Comparable<? super T>> list, T key)
-public static <T> int binarySearch(List<? extends T> list, T key, Comparator<? super T> c)
-public static <T extends Object & Comparable<? super T>> T max(Collection<? extends T> coll)
-public static <T> T max(Collection<? extends T> coll, Comparator<? super T> comp)
-public static <T extends Object & Comparable<? super T>> T min(Collection<? extends T> coll)
-public static <T> T min(Collection<? extends T> coll, Comparator<? super T> comp)
+2. Searching & Finding
+binarySearch(List<? extends Comparable<? super T>> list, T key) - int - Searches for key using binary search (must be sorted).
+binarySearch(List<? extends T> list, T key, Comparator<? super T> c) - int - Binary search using comparator.
+max(Collection<? extends T> coll) - T - Returns the maximum element (natural order).
+max(Collection<? extends T> coll, Comparator<? super T> comp) - T - Returns the maximum element using comparator.
+min(Collection<? extends T> coll) - T - Returns the minimum element (natural order).
+min(Collection<? extends T> coll, Comparator<? super T> comp) - T - Returns the minimum element using comparator.
+frequency(Collection<?> c, Object o) - int - Counts how many times o occurs in the collection.
+indexOfSubList(List<?> source, List<?> target) - int - Index of first sublist occurrence.
+lastIndexOfSubList(List<?> source, List<?> target) - int - Index of last sublist occurrence.
 
-3. Synchronization Wrappers
-public static <T> Collection<T> synchronizedCollection(Collection<T> c)
-public static <T> List<T> synchronizedList(List<T> list)
-public static <K, V> Map<K, V> synchronizedMap(Map<K, V> m)
-public static <T> Set<T> synchronizedSet(Set<T> s)
-public static <K, V> SortedMap<K, V> synchronizedSortedMap(SortedMap<K, V> m)
-public static <T> SortedSet<T> synchronizedSortedSet(SortedSet<T> s)
-public static <K, V> NavigableMap<K, V> synchronizedNavigableMap(NavigableMap<K, V> m)
-public static <T> NavigableSet<T> synchronizedNavigableSet(NavigableSet<T> s)
+3. Wrappers (Unmodifiable / Synchronized / Checked)
+unmodifiableList(List<? extends T> list) - List<T> - Returns an unmodifiable view of the list.
+unmodifiableSet(Set<? extends T> set) - Set<T> - Same for set.
+unmodifiableMap(Map<? extends K, ? extends V> m) - Map<K, V> - Same for map.
+synchronizedList(List<T> list) - List<T> - Thread-safe wrapper for list.
+synchronizedSet(Set<T> s) - Set<T> - Thread-safe wrapper for set.
+synchronizedMap(Map<K, V> m) - Map<K, V> - Thread-safe wrapper for map.
+checkedList(List<E> list, Class<E> type) - List<E> - Runtime type-safe wrapper (legacy compatibility).
 
-4. Unmodifiable Wrappers
-public static <T> Collection<T> unmodifiableCollection(Collection<? extends T> c)
-public static <T> List<T> unmodifiableList(List<? extends T> list)
-public static <K, V> Map<K, V> unmodifiableMap(Map<? extends K, ? extends V> m)
-public static <T> Set<T> unmodifiableSet(Set<? extends T> s)
-public static <K, V> SortedMap<K, V> unmodifiableSortedMap(SortedMap<K, ? extends V> m)
-public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<? extends T> s)
-public static <K, V> NavigableMap<K, V> unmodifiableNavigableMap(NavigableMap<K, ? extends V> m)
-public static <T> NavigableSet<T> unmodifiableNavigableSet(NavigableSet<? extends T> s)
+4. Filling, Copying, Replacing
+fill(List<? super T> list, T obj) - void - Replaces all elements with the given object.
+copy(List<? super T> dest, List<? extends T> src) - void - Copies elements from src to dest.
+replaceAll(List<T> list, T oldVal, T newVal) - boolean - Replaces all occurrences of oldVal with newVal.
 
-5. Singleton, Empty, nCopies
-public static <T> Set<T> singleton(T o)
-public static <T> List<T> singletonList(T o)
-public static <K, V> Map<K, V> singletonMap(K key, V value)
-public static final <T> List<T> emptyList()
-public static final <T> Set<T> emptySet()
-public static final <K, V> Map<K, V> emptyMap()
-public static <T> List<T> nCopies(int n, T o)
-
-6. Frequency and Disjoint
-public static int frequency(Collection<?> c, Object o)
-public static boolean disjoint(Collection<?> c1, Collection<?> c2)
-
-7. Checked Wrappers (for runtime type safety)
-public static <E> Collection<E> checkedCollection(Collection<E> c, Class<E> type)
-public static <E> List<E> checkedList(List<E> list, Class<E> type)
-public static <E> Set<E> checkedSet(Set<E> s, Class<E> type)
-public static <K, V> Map<K, V> checkedMap(Map<K, V> m, Class<K> keyType, Class<V> valueType)
-public static <E> SortedSet<E> checkedSortedSet(SortedSet<E> s, Class<E> type)
-public static <K, V> SortedMap<K, V> checkedSortedMap(SortedMap<K, V> m, Class<K> keyType, Class<V> valueType)
-public static <E> NavigableSet<E> checkedNavigableSet(NavigableSet<E> s, Class<E> type)
-public static <K, V> NavigableMap<K, V> checkedNavigableMap(NavigableMap<K, V> m, Class<K> keyType, Class<V> valueType)
+5. Other Utilities
+addAll(Collection<? super T> c, T... elements) - boolean - Adds all elements to the collection.
+disjoint(Collection<?> c1, Collection<?> c2) - boolean - Returns true if collections have no common elements.
+nCopies(int n, T o) - List<T> - Immutable list of n copies of o.
+singleton(T o) - Set<T> - Immutable set containing only o.
+emptyList() - List<Object> - Immutable empty list.
+emptySet() - Set<Object> - Immutable empty set.
+emptyMap() - Map<Object, Object> - Immutable empty map.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------ java.util.Collection<E> Interface ------------------------------------------------------------------
