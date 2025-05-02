@@ -96,7 +96,7 @@ public class Main {
         /*
         Task 4: Use ListIterator to Add "X" After Every Element
         Input: ["A", "B", "C"]
-        Expected Output: ["A", "X", "B", "X", "C", "X"]
+        Expected Output: ["AX", "BX", "CX"]
          */
         System.out.println("Task 4:");
         ArrayList<String> arrlist4 = new ArrayList<>();
@@ -157,7 +157,7 @@ public class Main {
         while (iter6.hasNext()) {
             System.out.print(iter6.next() + " ");
         }
-        System.out.println();
+        System.out.println("\n");
 
         /*
         Task 7: Fill the List With 0s and Iterate Using ListIterator
@@ -214,6 +214,143 @@ public class Main {
         Input: [10, 20, 30, 40]
         Expected Output (reverse): 40 30 20 10
          */
+        System.out.println("Task 9:");
+        ArrayList<Integer> arrlist9 = new ArrayList<>();
+        arrlist9.add(10);
+        arrlist9.add(20);
+        arrlist9.add(30);
+        arrlist9.add(40);
+        System.out.println("Original: " + arrlist9);
+        ListIterator<Integer> literator9 = arrlist9.listIterator();
+        while(literator9.hasNext()) {
+            literator9.next();
+        }
+        System.out.println("Reversed: ");
+        while (literator9.hasPrevious()) {
+            System.out.print(literator9.previous() + " ");
+        }
+        System.out.println("\n");
+
+        /*
+        Task 10: Add "X" After Every Element While Traversing Forward
+        Input: ["a", "b", "c"]
+        Expected Output: ["a", "X", "b", "X", "c", "X"]
+         */
+        System.out.println("Task 10: ");
+        ArrayList<String> arrlist10 = new ArrayList<>();
+        arrlist10.add("a");
+        arrlist10.add("b");
+        arrlist10.add("c");
+        System.out.println("Original: " + arrlist10);
+        String strToAdd = "X";
+        ListIterator<String> literator10 = arrlist10.listIterator();
+        while(literator10.hasNext()) {
+            literator10.next();
+            literator10.add(strToAdd);
+        }
+        System.out.println("Modified: " + arrlist10);
+        System.out.println();
+
+        /*
+         Task 11: Replace Every Element With Its Uppercase Version Using set()
+         Input: ["java", "list", "iterator"]
+         Expected Output: ["JAVA", "LIST", "ITERATOR"]
+         */
+        System.out.println("Task 11:");
+        ArrayList<String> arrlist11 = new ArrayList<>();
+        arrlist11.add("java");
+        arrlist11.add("list");
+        arrlist11.add("iterator");
+        System.out.println("Original: " + arrlist11);
+        ListIterator<String> literator11 = arrlist11.listIterator();
+        while(literator11.hasNext()) {
+            String temp11 = literator11.next();
+            temp11 = temp11.toUpperCase();
+            literator11.set(temp11);
+        }
+        System.out.println("Capitalized: " + arrlist11);
+        System.out.println();
+
+        /*
+        Task 12: Use nextIndex() and previousIndex() to Print Indices
+        Input: [100, 200, 300]
+        Expected Output (during iteration):
+        Element: 100, nextIndex: 1, previousIndex: -1
+        Element: 200, nextIndex: 2, previousIndex: 0
+        Element: 300, nextIndex: 3, previousIndex: 1
+         */
+        System.out.println("Task 12:");
+        ArrayList<Integer> arrlist12 = new ArrayList<>();
+        arrlist12.add(100);
+        arrlist12.add(200);
+        arrlist12.add(300);
+        System.out.println("ArrayList: " + arrlist12);
+        ListIterator<Integer> literator12 = arrlist12.listIterator();
+        while(literator12.hasNext()) {
+            Integer element12 = literator12.next();
+            int nextIndex = literator12.nextIndex();
+            int prevIndex = literator12.previousIndex();
+            System.out.printf("Element: %d, nextIndex: %d, previousIndex: %d", element12, nextIndex, prevIndex);
+        }
+        System.out.println("\n");
+
+        /*
+         Task 13: Use ListIterator to Insert "START" at Beginning and "END" at End
+         Input: ["middle1", "middle2"]
+         Expected Output: ["START", "middle1", "middle2", "END"]
+         */
+        System.out.println("Task 13:");
+        ArrayList<String> arrList13 = new ArrayList<>();
+        arrList13.add("middle1");
+        arrList13.add("middle2");
+        System.out.println("Original: " + arrList13);
+        ListIterator<String> literator13 = arrList13.listIterator();
+        literator13.add("START");
+        while (literator13.hasNext()) {
+            literator13.next();
+        }
+        literator13.add("END");
+        System.out.println("Inserted: " + arrList13);
+        System.out.println();
+
+        /*
+        Task 14: Remove All Elements That Start With 'b' Using ListIterator
+        Input: ["apple", "banana", "blueberry", "cherry"]
+        Expected Output: ["apple", "cherry"]
+         */
+        System.out.println("Task 14:");
+        ArrayList<String> arrlist14 = new ArrayList<>();
+        arrlist14.add("apple");
+        arrlist14.add("banana");
+        arrlist14.add("blueberry");
+        arrlist14.add("cherry");
+        System.out.println("Original: " + arrlist14);
+        ListIterator<String> literator14 = arrlist14.listIterator();
+        while(literator14.hasNext()) {
+            String pattern = "[Bb].*";
+            if(literator14.next().matches(pattern)) literator14.remove();
+        }
+        System.out.println("Refined: " + arrlist14);
+        System.out.println();
+
+        /*
+        Task 15: Traverse Forward, Then Backward Without Resetting the Iterator
+        Input: [1, 2, 3]
+        Expected Output:
+        Forward: 1 2 3
+        Backward: 3 2 1
+         */
+        System.out.println("Task 15: ");
+        ArrayList<Integer> arrlist15 = new ArrayList<>();
+        arrlist15.add(1);
+        arrlist15.add(2);
+        arrlist15.add(3);
+        System.out.println("Original: " + arrlist15);
+        ListIterator<Integer> literator15 = arrlist15.listIterator();
+        while(literator15.hasNext()) System.out.print(literator15.next() + " ");
+        System.out.println();
+        while(literator15.hasPrevious()) System.out.print(literator15.previous() + " ");
+        System.out.println();
 
 
 
