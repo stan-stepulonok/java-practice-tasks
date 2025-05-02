@@ -126,8 +126,29 @@ Methods:
 13. void clear() - Description: Removes all elements from the collection.
 14. boolean equals(Object o) - Description: Compares the specified object with this collection for equality. Parameters: o – object to be compared. Returns: true if the collections are equal.
 15. int hashCode() - Description: Returns the hash code value for this collection.
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ java.util.Iterator<E> Interface and ListIterator<E> Interface (subinterface) ------------------------------------------------------------------
+ListIterator is bidirectional, unlike Iterator, which is forward-only.
+
+ListIterator is typically obtained from List objects like ArrayList via:
+ListIterator<String> it = list.listIterator();        // from start
+ListIterator<String> it = list.listIterator(index);   // from specific index
+
+1. Iterator
+boolean hasNext() - Returns true if the iteration has more elements.
+E next() - Returns the next element in the iteration. Throws NoSuchElementException if no more elements.
+void remove() - Removes the last element returned by this iterator. Can only be called once per call to next(). Optional operation (may throw UnsupportedOperationException).
+
+2. ListIterator
+boolean hasPrevious() - Returns true if there are elements before the current position in the list.
+E previous() - Returns the previous element and moves the cursor backward. Throws NoSuchElementException if no previous element.
+int nextIndex() - Returns the index of the element that would be returned by a call to next(). Returns list size if at the end.
+int previousIndex() - Returns the index of the element that would be returned by a call to previous(). Returns -1 if at the beginning.
+void set(E e) - Replaces the last element returned by next() or previous() with the specified element. Can only be called if neither remove() nor add() was called after the last next() or previous().
+void add(E e) - Inserts the specified element into the list at the current cursor position. The element is inserted before the element that would be returned by next(), and after the one that would be returned by previous().
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
  */
 public class Main {
     public static void main(String[] args) {
