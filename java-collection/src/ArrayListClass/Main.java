@@ -140,6 +140,47 @@ public class Main {
         After removing 990 elements: size = 10
         Called trimToSize() – internal capacity now matches size (if observable)
          */
+        System.out.println("Task 4:");
+        ArrayList<String> arrlist4 = new ArrayList<>(1000);
+        System.out.println("Size (empty): " + arrlist4.size());
+        for (int i = 0; i < 1000; i++) {
+            arrlist4.add("String");
+        }
+        System.out.println("Size (filled with 1000): " + arrlist4.size());
+        for (int i = 0; i < 10; i++) {
+            arrlist4.remove(i);
+        }
+        System.out.println("Size (after removal 990): " + arrlist4.size());
+        arrlist4.trimToSize();
+        System.out.println("Trimmed to size.");
+        System.out.println();
+
+        /*
+        Task 5 – Working with Custom Objects
+        Description:
+        Use an ArrayList<Book> to practice with object storage and replacement.
+        Input/Output Example:
+        Accessed book at index 1: "The Hobbit" by Tolkien
+        Replaced book at index 2 with "Dune" by Herbert
+        Updated List:
+        [Book1, Book2, Book3, Dune, Book5]
+         */
+        System.out.println("Task 5: ");
+        Book book1 = new Book("The Dark Tower", "King");
+        Book book2 = new Book("The Hobbit", "Tolkien");
+        Book book3 = new Book("Replace", "Replace");
+        Book book3Replacement = new Book("Dune", "Herbert");
+        ArrayList<Book> books5 = new ArrayList<>();
+        books5.add(book1);
+        books5.add(book2);
+        books5.add(book3);
+        System.out.println("Original list: " + books5);
+        System.out.println("Obtained book: " + books5.get(1));
+        System.out.println("Replaced book: " + books5.set(2, book3Replacement));
+        System.out.println("Updated collection: " + books5);
+        System.out.println();
+
+
 
 
 
