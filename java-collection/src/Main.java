@@ -279,6 +279,96 @@ add(int index, E element) - O(n)
 remove(int index) - O(n)
 contains(Object o) - O(n)
 iterator() - O(1) to create, O(n) to iterate
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ Level 3: class LinkedList<E> ------------------------------------------------------------------
+ It is a doubly-linked list implementation of the List and Deque interfaces.
+ It allows constant-time insertions or removals using iterators, and is efficient for frequent additions/removals at both ends.
+ Unlike ArrayList, it does not use a backing array, but instead consists of nodes where each node holds data and links to the next and previous node.
+
+Constructors and Object Instantiation
+- public LinkedList()                             // Constructs an empty list -> LinkedList<String> list1 = new LinkedList<>();
+- public LinkedList(Collection<? extends E> c)    // Constructs a list with the elements of the given collection -> List<Integer> numbers = List.of(1, 2, 3); LinkedList<Integer> list2 = new LinkedList<>(numbers);
+
+Methods:
+- Inherited from Interfaces:
+    - boolean add(E e) - Appends the specified element to the end of the list.
+    - void add(int index, E element) - Inserts the element at the specified index.
+    - boolean addAll(Collection<? extends E> c) - Appends all elements from the specified collection.
+    - boolean addAll(int index, Collection<? extends E> c) - Inserts all elements at the specified position.
+    - void clear() - Removes all elements from the list.
+    - boolean contains(Object o) - Returns true if the list contains the specified element.
+    - E get(int index) - Returns the element at the specified index.
+    - int indexOf(Object o) - Returns the index of the first occurrence of the element.
+    - int lastIndexOf(Object o) - Returns the index of the last occurrence of the element.
+    - E remove(int index) - Removes and returns the element at the specified index.
+    - boolean remove(Object o) - Removes the first occurrence of the specified element.
+    - E set(int index, E element) - Replaces the element at the index with the specified element.
+    - int size() - Returns the number of elements in the list.
+    - boolean isEmpty() - Returns true if the list has no elements.
+    - Object[] toArray() - Returns an array containing all elements in order.
+    - <T> T[] toArray(T[] a) - Returns an array containing all elements, of the specified type.
+    - Iterator<E> iterator() - Returns an iterator over the list.
+    - ListIterator<E> listIterator() - Returns a list iterator over the list.
+    - ListIterator<E> listIterator(int index) - Returns a list iterator starting at the specified index.
+    - List<E> subList(int fromIndex, int toIndex) - Returns a view of the portion of the list between the given indices.
+
+- From Deque<E>
+    // add first element
+    - void addFirst(E e) - Inserts the element at the front of the list.
+    - boolean offerFirst(E e) - Inserts element at front; returns false on failure.
+    // add last element
+    - void addLast(E e) - Inserts the element at the end of the list.
+    - boolean offerLast(E e) - Inserts element at end; returns false on failure.
+    // get first element
+    - E getFirst() - Retrieves the first element; throws exception if empty.
+    - E peekFirst() - Retrieves the first element without removing, or null if empty.
+    // get last element
+    - E getLast() - Retrieves the last element; throws exception if empty.
+    - E peekLast() - Retrieves the last element without removing, or null if empty.
+    // remove first element
+    - E removeFirst() - Removes and returns the first element.
+    - E pollFirst() - Retrieves and removes the first element, or null if empty.
+    // remove last element
+    - E removeLast() - Removes and returns the last element.
+    - E pollLast() - Retrieves and removes the last element, or null if empty.
+
+- From Queue<E>
+    - boolean offer(E e) - Inserts the specified element into the queue.
+    - E remove() - Retrieves and removes the head of the queue; throws exception if empty.
+    - E poll() - Retrieves and removes the head of the queue, or null if empty.
+    - E element() - Retrieves, but does not remove, the head; throws exception if empty.
+    - E peek() - Retrieves, but does not remove, the head; returns null if empty.
+
+- Overridden Methods
+    - boolean equals(Object o) - Compares the list to another object for equality.
+    - int hashCode() - Returns the hash code based on list elements.
+    - String toString() - Returns a string representation of the list.
+
+- Methods Unique to LinkedList (not in ArrayList)
+    - void push(E e) - Pushes an element onto the stack (front of list).
+    - E pop() - Removes and returns the element from the top (front) of the list.
+    - E peek() - Retrieves, but does not remove, the first element (stack top).
+
+Performance Characteristics
+get(index) - O(n) - Must traverse from start or end.
+add(element) - O(1) - Constant time at head or tail.
+add(index) - O(n) - Needs traversal to index.
+remove(index) - O(n) - Same reason as above.
+iterator.add() - O(1) - Constant time with ListIterator.
+Memory Overhead - High - Each node holds data + 2 pointers (prev, next).
+Random Access - Poor - Not suitable for index-based access.
+
+Comparison with ArrayList
+Feature	                    ArrayList LinkedList
+Access (get/set by index)	    O(1)	O(n)
+Insert/remove at end	        O(1) 	O(1)
+Insert/remove at start	        O(n)	O(1)
+Insert/remove in middle	        O(n)	O(n)
+Memory use	                    Less 	More
+Implements Deque?	            ❌ No	✅ Yes
+Best Use Case	Frequent reads, rare modifications	Frequent insertions/removals
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  */
 public class Main {
