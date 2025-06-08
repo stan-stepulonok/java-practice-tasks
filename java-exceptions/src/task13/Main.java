@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Integer[] arrOfInts = {1, 2, null, 4};
+        Integer[] arrOfInts = {1, 2, null, 4, null, 5, 6};
 
 
         try {
@@ -31,8 +31,8 @@ public class Main {
                     continue;
                 }
                 else System.out.println(arrOfInts[i]);
-                if (exceptionTriggered) throw expectionObj;
             }
+            if (exceptionTriggered) throw expectionObj;
         } catch (CustomException e) {
             logger.severe("Exception: " + e.getMessage());
 
