@@ -271,6 +271,221 @@ public class Main {
         System.out.println(Arrays.toString(strArray10));
         System.out.println();
 
+/*      Task 11: Add and Display
+        Description:
+        Create a collection and add at least five different elements (e.g., strings, integers, or custom objects).
+        Print the entire collection afterward.
+        Output example:
+        [cat, dog, parrot, hamster, rabbit]
+        */
+        System.out.println("Task 11: ");
+        // Object
+        String str1 = "Test 1";
+        Integer int1 = 1;
+        Collection<Object> coll111 = new ArrayList<>();
+        coll111.add(str1);
+        coll111.add(int1);
+        System.out.println("Collection of objects: " + coll111);
+        // String
+        String str2 = "Test 2";
+        Collection<String> coll112 = new ArrayList<>();
+        coll112.add(str1);
+        coll112.add(str2);
+        System.out.println("Collection of strings: " + coll112);
+        // CustomObject
+        Main.CustomObject obj1 = new CustomObject("Test", 1);
+        Main.CustomObject obj2 = new CustomObject("Test", 2);
+        Collection<Main.CustomObject> coll113 = new ArrayList<>();
+        coll113.add(obj1);
+        coll113.add(obj2);
+        System.out.println("Collection of custom objects: " + coll113);
+        System.out.println();
+
+
+/*        Task 12: Check Existence
+        Description:
+        Check if certain elements exist in the collection and print the result.
+        Output example:
+        Element "dog" exists: true
+        Element "lion" exists: false
+        */
+        System.out.println("Task 12: ");
+        String dog12 = "dog";
+        String wolf12 = "wolf";
+        Collection<String> coll12 = new ArrayList<>();
+        coll12.add(dog12);
+        coll12.add(wolf12);
+        System.out.println("Collection 12: " + coll12);
+        String checkString = "dog";
+        System.out.println(checkString + " in the collection? ... " + coll12.contains(checkString));
+        checkString = "lion";
+        System.out.println(checkString + " in the collection? ... " + coll12.contains(checkString));
+        System.out.println();
+
+/*      Task 13: Remove Elements
+        Description:
+        Remove an existing element and try removing a non-existing one.
+        Print the collection after each operation and show whether the removal was successful.
+        Output example:
+        Removing "dog": true
+                [cat, parrot, hamster, rabbit]
+        Removing "lion": false
+                [cat, parrot, hamster, rabbit]
+                */
+
+        System.out.println("Task 13: ");
+        Collection<String> coll13 = new ArrayList<>();
+        coll13.add("cat");
+        coll13.add("parrot");
+        coll13.add("hamster");
+        coll13.add("dog");
+        coll13.add("rabbit");
+        System.out.println("Collection 13 before: " + coll13);
+        System.out.println("Removing dog -> " + coll13.remove("dog"));
+        System.out.println("Collection 13 after removing dog: " + coll13);
+        System.out.println("Removing non-existed -> " + coll13.remove("test"));
+        System.out.println("Collection 13 after removing unexisting: " + coll13);
+        System.out.println();
+
+/*      Task 14: Bulk Add and Remove
+        Description:
+        Add a group of elements from another collection.
+        Then remove all elements of a different collection from the original one.
+        Display the result after each operation.
+        Output example:
+        After bulk add: [cat, parrot, hamster, rabbit, mouse, turtle]
+        After bulk remove: [cat, parrot, rabbit, turtle]
+        */
+        System.out.println("Task 14: ");
+        Collection<String> coll141 = new ArrayList<>();
+        coll141.add("cat1");
+        coll141.add("cat2");
+        coll141.add("cat3");
+        coll141.add("cat4");
+        System.out.println("Before 1: " + coll141);
+        Collection<String> coll142 = new ArrayList<>();
+        coll142.add("dog1");
+        coll142.add("dog2");
+        coll142.add("dog3");
+        coll142.add("dog4");
+        System.out.println("Before 2: " + coll142);
+        System.out.println("Add 1 into 2: " + coll142.addAll(coll141));
+        System.out.println("After add 2: " + coll142);
+        System.out.println("Remove 1 from 2: " + coll142.removeAll(coll141));
+        System.out.println("After remove 2: " + coll142);
+        System.out.println();
+
+/*      Task 15: Retain Common Elements
+        Description:
+        Given two collections, retain only the elements that are common in both. Print the collection after the operation.
+        Output example:
+        Original: [apple, banana, cherry, date]
+        Other: [banana, cherry, fig]
+        After retain: [banana, cherry]
+        */
+        System.out.println("Task 15:");
+        Collection<String> coll151 = new ArrayList<>();
+        coll151.add("test1");
+        coll151.add("test2");
+        coll151.add("test3");
+        coll151.add("test4");
+        Collection<String> coll152 = new ArrayList<>();
+        coll152.add("test3");
+        coll152.add("test4");
+        coll152.add("test5");
+        coll152.add("test6");
+        Collection<String> coll153 = new ArrayList<>();
+        System.out.println("Retained before: " + coll153);
+        coll153.addAll(coll151);
+        System.out.println("Retained after copying 1: " + coll153);
+        coll153.retainAll(coll152);
+        System.out.println("Retained Collection: " + coll153);
+        System.out.println();
+
+/*      Task 16: Convert to Array
+        Description:
+        Convert the collection to an array and print the contents of the array.
+        Output example:
+        Array: [blue, red, green]
+        */
+        System.out.println("Task 16:");
+        Collection<String> coll16 = new ArrayList<>();
+        coll16.add("blue");
+        coll16.add("red");
+        coll16.add("green");
+        String[] collectionToArray = new String[coll16.size()];
+        collectionToArray = coll16.toArray(collectionToArray);
+        System.out.println("Array: " + Arrays.toString(collectionToArray));
+        System.out.println();
+
+/*      Task 17: Clear and Check Empty
+        Description:
+        Clear all elements from the collection. Before and after clearing, check if the collection is empty.
+        Output example:
+        Is empty before clear: false
+        Is empty after clear: true
+        */
+        System.out.println("Task 17:");
+        Collection<String> coll17 = new ArrayList<>();
+        coll17.add("test1");
+        coll17.add("test2");
+        coll17.add("test3");
+        System.out.println("Before: " + coll17);
+        System.out.println("Is empty? ... " + coll17.isEmpty());
+        coll17.clear();
+        System.out.println("After clear ... " + coll17);
+        System.out.println("Is empty? ... " + coll17.isEmpty());
+        System.out.println();
+
+/*      Task 18: Size Tracking
+        Description:
+        Track the size of the collection before and after a series of additions and removals.
+        Output example:
+        Size before additions: 2
+        Size after additions: 5
+        Size after removals:
+        */
+        System.out.println("Task 18:");
+        Collection<String> coll18 = new ArrayList<>();
+        System.out.println(coll18.size());
+        coll18.add("test1");
+        System.out.println(coll18.size());
+        coll18.remove("test1");
+        System.out.println(coll18.size());
+        System.out.println();
+
+
+/*      Task 19: Iterate with for-each
+        Description:
+        Iterate over the collection using a for-each loop and print each element on a new line.
+        Output example:
+        Element: one
+        Element: two
+        Element: three
+        */
+        System.out.println("Task 19:");
+        Collection<String> coll19 = new ArrayList<>();
+        coll19.add("one");
+        coll19.add("two");
+        coll19.add("three");
+        for(String s : coll19) {
+            System.out.println("Element: " + s);
+        }
+        System.out.println();
+
+    }
+
+    static class CustomObject {
+        String strProperty;
+        Integer intProperty;
+        CustomObject(String strProperty, Integer intProperty) {
+            this.strProperty = strProperty;
+            this.intProperty = intProperty;
+        }
+        @Override
+        public String toString() {
+            return strProperty + intProperty;
+        }
     }
 
 }
