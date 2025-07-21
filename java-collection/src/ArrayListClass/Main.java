@@ -2,8 +2,7 @@ package ArrayListClass;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -180,9 +179,269 @@ public class Main {
         System.out.println("Updated collection: " + books5);
         System.out.println();
 
+/*
+        Task 6 – Ensure Capacity
+        Description:
+        Create an ArrayList with a small initial capacity. Increase its capacity in advance to accommodate at least 1000 elements efficiently.
+        Output example:
+        No visible output expected unless you're monitoring performance or debugging internal capacity.
+*/
+        System.out.println("Task 6:");
+        ArrayList<Integer> arrList6def = new ArrayList<>();
+        ArrayList<Integer> arrList6ExtraCapacity = new ArrayList<>(100);
 
+        long startDef = System.nanoTime();
+        for (int i = 0; i < 100; i++) {
+            arrList6def.add(i);
+        }
+        long endDef = System.nanoTime();
+        long durationDef = endDef - startDef;
+        System.out.println("Default capacity duration (nanoseconds): " + durationDef);
 
+        long startExtra = System.nanoTime();
+        for (int i = 0; i < 100; i++) {
+            arrList6ExtraCapacity.add(i);
+        }
+        long endExtra = System.nanoTime();
+        long durationExtra = endExtra - startExtra;
+        System.out.println("Default capacity duration (nanoseconds): " + durationExtra);
 
+        System.out.println("Working with " + (
+                (durationDef > durationExtra) ? "extra capacity" :
+                        (durationDef < durationExtra) ? "default capacity" : "both arrays")
+                + " is efficient!");
+        System.out.println();
+
+/*
+        Task 7 – Trim Capacity
+        Description:
+        Populate an ArrayList with multiple elements. Remove a large number of them, and then trim the capacity to fit the current size.
+
+        Output example:
+        Original size: 100
+        Trimmed size: 25
+*/
+        System.out.println("Task 7:");
+        ArrayList<Integer> arrList7 = new ArrayList<>(100);
+        arrList7.add(0, 999);
+        arrList7.add(1, 999);
+        arrList7.add(2, 999);
+        System.out.println("Size: " + arrList7.size());
+        arrList7.trimToSize();
+        System.out.println();
+
+/*
+        Task 8 – Direct Access and Replacement
+        Description:
+        Access elements at specific positions and replace them with new values. Do this for the first, middle, and last element.
+        Output example:
+        Original list: [10, 20, 30, 40, 50]
+        After replacement: [100, 20, 300, 40, 500]
+        (⚠️ Uses inherited get() and set() methods from List)
+*/
+        System.out.println("Task 8:");
+        ArrayList<Integer> arrList8 = new ArrayList<>();
+        arrList8.add(10);
+        arrList8.add(1, 20);
+        arrList8.add(2, 30);
+        arrList8.add(3, 40);
+        arrList8.add(4, 50);
+        System.out.println("Original array list: " + arrList8);
+        int index8 = 0;
+        System.out.println("Replaced element start: " + arrList8.set(index8, arrList8.get(index8)*10));
+        System.out.println("New element: " + arrList8.get(index8));
+        index8 = arrList8.size()/2;
+        System.out.println("Replaced element middle: " + arrList8.set(index8, arrList8.get(index8)*10));
+        System.out.println("New element: " + arrList8.get(index8));
+        index8 = arrList8.size() - 1;
+        System.out.println("Replaced element end: " + arrList8.set(index8, arrList8.get(index8)*10));
+        System.out.println("New element: " + arrList8.get(index8));
+        System.out.println("Modified array list: " + arrList8);
+        System.out.println();
+
+/*
+        Task 9 – Index-based Insertion
+        Description:
+        Insert elements at various valid indexes, including the beginning, middle, and end of the ArrayList.
+        Output example:
+        Original list: [A, B, D]
+        After insertions: [A, B, C, D, E]
+        (⚠️ Uses inherited add(int, E) method from List)
+*/
+        System.out.println("Task 9:");
+        ArrayList<Integer> arrList = new ArrayList<>();
+        arrList.add(0);
+        arrList.add(0);
+        arrList.add(0);
+        arrList.add(0);
+
+        long start9 = System.nanoTime();
+        arrList.add(0, 999);
+        long end9 = System.nanoTime();
+        long result = end9 - start9;
+        System.out.println("Inserting at the beginning requires (nano): " + result);
+
+        start9 = System.nanoTime();
+        arrList.add(2, 999);
+        end9 = System.nanoTime();
+        result = end9 - start9;
+        System.out.println("Inserting in the middle requires (nano): " + result);
+
+        start9 = System.nanoTime();
+        arrList.add(arrList.size()-1, 999);
+        end9 = System.nanoTime();
+        result = end9 - start9;
+        System.out.println("Inserting at the end requires (nano): " + result);
+        System.out.println();
+        
+/*
+        Task 10 – Index Lookup
+        Description:
+        Find the first and last index of duplicate elements in an ArrayList.
+        Output example:
+        List: [a, b, c, a, d, a]
+        First index of 'a': 0
+        Last index of 'a': 5
+*/
+        System.out.println("Task 10:");
+        ArrayList<String> arrList10 = new ArrayList<>();
+        arrList10.add("a");
+        arrList10.add("b");
+        arrList10.add("c");
+        arrList10.add("a");
+        arrList10.add("d");
+        arrList10.add("a");
+        System.out.println("Array List: " + arrList10);
+        HashSet<String> arrList10CheckedElements = new HashSet<>();
+        for (int i = 0; i < arrList10.size(); i++) {
+            String element10 = arrList10.get(i);
+            if (!arrList10CheckedElements.contains(element10)) {
+                for (int j = 0; j < arrList10.size(); j++) {
+                    if (i == j) continue;
+                    if (arrList10.get(j).equals(element10)) {
+                        System.out.println("First index of \'" + element10 + "\': " + arrList10.indexOf(element10));
+                        System.out.println("Last index of \'" + element10 + "\': " + arrList10.lastIndexOf(element10));
+                        break;
+                    }
+                }
+            }
+            arrList10CheckedElements.add(element10);
+        }
+        System.out.println();
+
+/*
+        Task 11 – Create a Sublist
+        Description:
+        Generate a sublist from an ArrayList that includes a middle portion of the elements.
+        Output example:
+        Original list: [10, 20, 30, 40, 50, 60]
+        Sublist (from index 2 to 4): [30, 40]
+        */
+        System.out.println("Task 11:");
+        // !!! sublist is a view, not a copy !!!
+        ArrayList<Integer> arrlist11Main = new ArrayList<>();
+        arrlist11Main.add(10);
+        arrlist11Main.add(20);
+        arrlist11Main.add(30);
+        arrlist11Main.add(40);
+        arrlist11Main.add(50);
+        System.out.println("Original: " + arrlist11Main);
+        List<Integer> arrlist11View = new ArrayList<>();
+        arrlist11View = arrlist11Main.subList(2, 4);
+        System.out.println("View: " + arrlist11View);
+        System.out.println("Modifying view ...");
+        arrlist11View.set(0, 999);
+        System.out.println("Original: " + arrlist11Main);
+        System.out.println("View: " + arrlist11View);
+        System.out.println();
+
+        /*
+        Task 12 – Bulk Insert via Another List
+        Description:
+        Insert all elements from one ArrayList into another at a specific index.
+        Output example:
+        List A: [1, 2, 3]
+        List B: [8, 9]
+        After insertion: [1, 2, 8, 9, 3]
+*/
+        System.out.println("Task 12:");
+        ArrayList<Integer> arrList12A = new ArrayList<>();
+        arrList12A.add(1);
+        arrList12A.add(2);
+        arrList12A.add(3);
+        System.out.println("ArrayList A: " + arrList12A);
+        ArrayList<Integer> arrList12B = new ArrayList<>();
+        arrList12B.add(8);
+        arrList12B.add(9);
+        System.out.println("ArrayList B: " + arrList12B);
+        arrList12A.addAll(2, arrList12B);
+        System.out.println("ArrayList A modified: " + arrList12A);
+        System.out.println();
+
+        /*
+        Task 13 – Resize by Removing a Range
+        Description:
+        Remove a specific range of elements from the list using an index-based loop.
+        Output example:
+        Original list: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        After removing indexes 3–6: [0, 1, 2, 7, 8, 9]
+*/
+        System.out.println("Task 13:");
+        ArrayList<Integer> arrList13 = new ArrayList<>();
+        arrList13.add(0);
+        arrList13.add(1);
+        arrList13.add(2);
+        arrList13.add(3);
+        arrList13.add(4);
+        arrList13.add(5);
+        arrList13.add(6);
+        arrList13.add(7);
+        arrList13.add(8);
+        arrList13.add(9);
+        System.out.println("Original: " + arrList13);
+        int indexStart13 = 3, indexEnd14 = 6;
+        List<Integer> arrList13Subl = arrList13.subList(indexStart13,indexEnd14+1);
+        arrList13.removeAll(arrList13Subl); // arrList13.subList(indexStart13, indexEnd14 + 1).clear();
+        System.out.println("Modified: " + arrList13);
+        System.out.println();
+
+/*
+        Task 14 – Clone the List
+        Description:
+        Clone an ArrayList and verify changes to one list do not affect the other.
+        Output example:
+        Original: [apple, banana]
+        Clone before change: [apple, banana]
+        Original after change: [apple, banana, cherry]
+        Clone after change: [apple, banana]
+*/
+        System.out.println("Task 14:");
+        ArrayList<String> arrList14 = new ArrayList<>();
+        arrList14.add("apple");
+        arrList14.add("banana");
+        ArrayList<String> arrList14Cloned = new ArrayList<>();
+        arrList14Cloned = (ArrayList<String>) arrList14.clone();
+        arrList14.add("test");
+        System.out.println("Original: " + arrList14);
+        System.out.println("Cloned: " + arrList14Cloned);
+        System.out.println();
+
+        /*
+        Task 15 – Conversion to Array
+        Description:
+        Convert the ArrayList into a regular array and print its elements.
+        Output example:
+        Array contents: [cat, dog, rabbit]
+*/
+        System.out.println("Task 15:");
+        ArrayList<String> arrList15 = new ArrayList<>();
+        arrList15.add("cat");
+        arrList15.add("dog");
+        arrList15.add("rabbit");
+        Object[] arrFromList15 = new String[arrList15.size()];
+        arrFromList15 = arrList15.toArray();
+        System.out.println(Arrays.toString(arrFromList15));
+        System.out.println();
 
 
     }
