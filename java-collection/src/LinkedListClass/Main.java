@@ -2,6 +2,7 @@ package LinkedListClass;
 
 import java.sql.SQLOutput;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class Main {
@@ -134,6 +135,103 @@ Remaining list: [orange, banana]
         while(literator5.hasPrevious()) {
             System.out.println(literator5.previous());
         }
+        System.out.println();
+
+                /*
+        Task 6: Add and Print All Elements
+        Input:
+        Add elements: "Java", "Python", "C++"
+        Output:
+        [Java, Python, C++]
+         */
+        System.out.println("Task 6:");
+        LinkedList<String> llist6 = new LinkedList<>();
+        boolean addingResult1 = llist6.add("Java");
+        System.out.println("Added to the end? ... " + addingResult1);
+        llist6.add("Python");
+        llist6.add("C++");
+        System.out.println(llist6);
+        System.out.println();
+
+        /*
+        Task 7: Insert at Specific Position
+        Input:
+        Initial: ["Apple", "Banana", "Cherry"]
+        Insert "Avocado" at index 1
+        Output:
+        [Apple, Avocado, Banana, Cherry]
+         */
+        System.out.println("Task 7:");
+        LinkedList<String> llist7 = new LinkedList<>();
+        llist7.add("Apple"); // returns boolean
+        llist7.add("Banana");
+        llist7.add("Cherry");
+        System.out.println("Original: " + llist7);
+        llist2.add(1,"Avocado"); // void, nothing to print
+        System.out.println("Added: " + llist7);
+        System.out.println();
+
+        /*
+        Task 8: Replace an Element
+        Input:
+        Initial: ["Sun", "Moon", "Stars"]
+        Replace index 2 with "Galaxy"
+        Output:
+        [Sun, Moon, Galaxy]
+         */
+        System.out.println("Task 8:");
+        LinkedList<String> llist8 = new LinkedList<>();
+        llist8.add("Sun");
+        llist8.add("Moon");
+        llist8.add("Stars");
+        String replacement3 = "Galaxy";
+        System.out.println("Original: " + llist8);
+        String replaced3 = llist8.set(2, replacement3);
+        System.out.printf("Replaces %s with %s, so the replaced list is: " + llist8 + "%n", replaced3, replacement3);
+        System.out.println();
+
+        /*
+        Task 9: Remove an Element by Value
+        Input:
+        Initial: ["Dog", "Cat", "Fish", "Bird"]
+        Remove "Fish"
+        Output:
+        [Dog, Cat, Bird]
+         */
+        System.out.println("Task 9:");
+        LinkedList<String> llist9 = new LinkedList<>();
+        llist9.add("Dog");
+        llist9.add("Cat");
+        llist9.add("Fish");
+        llist9.add("Bird");
+        System.out.println("Original: " + llist9);
+        boolean removedResult4 = llist9.remove("Dog"); // remove by object returns boolean
+        System.out.println("Removed? ... " + removedResult4);
+        System.out.println("Removed \"Dog\": " + llist9);
+        String removedElement4 = llist9.remove(0);
+        System.out.printf("Removed %s at position 0 and saved result, so removed collection is: " + llist9 + "%n", removedElement4);
+        System.out.println();
+
+        /*
+        Task 10: Sublist Extraction
+        Input:
+        Initial: ["A", "B", "C", "D", "E", "F"]
+        Extract from index 2 to 5
+        Output:
+        [C, D, E]
+         */
+        System.out.println("Task 10:");
+        LinkedList<String> llist10 = new LinkedList<>();
+        llist5.add("A");
+        llist5.add("B");
+        llist5.add("C");
+        llist5.add("D");
+        llist5.add("E");
+        llist5.add("F");
+        System.out.println("Original: " + llist10);
+        List<String> subList10 = new LinkedList<>();
+        subList10 = llist10.subList(2, 5); // the static type is List, the dynamic is LinkedList
+        System.out.println("Sublist: " + subList10);
         System.out.println();
 
     }

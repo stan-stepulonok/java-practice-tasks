@@ -370,6 +370,38 @@ Implements Deque?	            ❌ No	✅ Yes
 Best Use Case	Frequent reads, rare modifications	Frequent insertions/removals
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ Interface Queue ------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Description:
+It is designed for holding elements prior to processing, typically in a FIFO (first-in, first-out) order.
+The Queue interface is an ordered collection, but the order applies to the head-tail structure (FIFO, usually).
+Unlike List, it does not allow positional access (no index-based operations).
+The Queue interface introduces methods specific to insertion, retrieval, and removal, often with two variants: one that throws an exception on failure and one that returns a special value (null or false).
+Capacity refers to the maximum number of elements a queue can hold, depending on the implementation:
+- LinkedList, PriorityQueue - no fixed size, auto scales
+- ArrayBlockingQueue, LinkedBlockingQueue - fixed capacity, you must specify it in the constructor
+
+2. Collection methods:
+- boolean add(E e) - Inserts the specified element into the queue. May throw IllegalStateException if capacity restrictions prevent addition.
+- boolean remove(Object o) - Removes a single instance of the specified element (the first matching element encountered during traversal, earliest occurrence). Returns true if removed.
+- boolean contains(Object o) - Returns true if the queue contains the specified element.
+- int size() - Description: Returns the number of elements in the queue.
+- void clear() - Removes all elements from the queue.
+
+3. Queue methods:
+| adding | ["a", "b", "c", "a"] -> add "x" -> ["a", "b", "c", "a", "x"]
+- boolean offer(E e) - Inserts the specified element into the queue if possible. Returns true if the element was added successfully, false otherwise (e.g. capacity restrictions). Exception-free alternative to add(E e).
+- boolean add(E e) - see above
+| removing | ["a", "b", "c", "a"] -> remove "a" -> ["b", "c", "a"]
+- E poll() - Retrieves and removes the head of the queue. Returns null if the queue is empty.
+- E remove() - Retrieves and removes the head of the queue. Throws NoSuchElementException if the queue is empty.
+| getting |
+- E peek() - Retrieves, but does not remove, the head of the queue. Returns null if the queue is empty.
+- E element() - Retrieves, but does not remove, the head of the queue. Throws NoSuchElementException if the queue is empty.
+
+
+
  */
 public class Main {
     public static void main(String[] args) {
