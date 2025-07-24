@@ -371,8 +371,6 @@ Best Use Case	Frequent reads, rare modifications	Frequent insertions/removals
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------ Interface Queue ------------------------------------------------------------------
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 1. Description:
 It is designed for holding elements prior to processing, typically in a FIFO (first-in, first-out) order.
 The Queue interface is an ordered collection, but the order applies to the head-tail structure (FIFO, usually).
@@ -399,9 +397,44 @@ Capacity refers to the maximum number of elements a queue can hold, depending on
 | getting |
 - E peek() - Retrieves, but does not remove, the head of the queue. Returns null if the queue is empty.
 - E element() - Retrieves, but does not remove, the head of the queue. Throws NoSuchElementException if the queue is empty.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ PriorityQueue<E> class ------------------------------------------------------------------
+Description:
+- A PriorityQueue<E> is a heap-based, unbounded, ordered queue that processes elements based on priority, not on insertion order.
+- Ordering: Natural ordering (via Comparable) or custom ordering (via Comparator).
+- Behavior: Always retrieves the least element (by priority).
+- Duplicates: Allowed.
+- Nulls: Not allowed — throws NullPointerException.
 
+Collection methods:
+ - boolean add(E e) - Adds an element (delegates to offer() in Queue).
+ - boolean remove(Object o) - Removes a single matching element (not necessarily head).
+ - boolean contains(Object o) - Returns true if queue contains the given element.
+ - int size() - Returns the number of elements in the queue.
+ - boolean isEmpty() - Checks whether the queue is empty.
+ - void clear() - Removes all elements.
+ - Object[] toArray() - Returns all elements as an Object array.
+ - <T> T[] toArray(T[] a) - Returns all elements in the specified array type.
+ - boolean containsAll(Collection<?> c) - Checks if the queue contains all elements from the given collection.
+ - boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection.
+ - boolean removeAll(Collection<?> c) - Removes all matching elements from the queue.
+ - boolean retainAll(Collection<?> c) - Retains only the elements that exist in the specified collection.
+ - boolean equals(Object o) - Compares this queue with another for equality.
+ - int hashCode() - Returns hash code for the queue.
 
+Queue methods:
+ - boolean offer(E e) - Inserts the element, returns false if not possible.
+ - E poll() - Retrieves and removes the head, or returns null if empty.
+ - E remove() - Retrieves and removes the head; throws exception if empty.
+ - E peek() - Retrieves (without removing) the head; returns null if empty.
+ - E element() - Retrieves (without removing) the head; throws if empty.
+
+PriorityQueue methods:
+ - Comparator<? super E> comparator() - Returns the comparator used to order the elements (or null if natural ordering).
+ - Spliterator<E> spliterator() - Returns a Spliterator for parallel processing.
+ - void trimToSize() - Trims the internal storage capacity to the current size (non-standard, sometimes used for optimization).
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  */
 public class Main {
     public static void main(String[] args) {
