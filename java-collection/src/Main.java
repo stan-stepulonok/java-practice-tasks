@@ -498,6 +498,18 @@ Methods Unique to Deque<E>:
 - Iterator<E> descendingIterator() - Returns an iterator over the elements in reverse (tail to head).
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ ArrayDeque<E> class ------------------------------------------------------------------
+Description:
+- ArrayDeque<E> is a resizable array-based implementation of the Deque interface.
+- No capacity limit (resizes as needed).
+- It allows elements to be added or removed from both ends, making it a better choice than Stack, LinkedList, or even ArrayList for stack/queue operations.
+- Faster than LinkedList for queue/deque operations (no node allocation).
+- Does not allow null elements. !!!!
+- Can be used as queue, stack, or deque.
+
+Methods:
+see Deque<E> interface
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  */
 public class Main {
