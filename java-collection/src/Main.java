@@ -435,6 +435,70 @@ PriorityQueue methods:
  - Spliterator<E> spliterator() - Returns a Spliterator for parallel processing.
  - void trimToSize() - Trims the internal storage capacity to the current size (non-standard, sometimes used for optimization).
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ Dequeue<E> interface ------------------------------------------------------------------
+Description:
+- Dequeue - "double ended queue" supports element insertion and removal at both ends.
+- Most Deque implementations place no fixed limits on the number of elements they may contain,
+- but this interface supports capacity-restricted deques as well as those with no fixed size limit.
+- when using implementations of Deque that have bounded capacity, such as:
+  ArrayBlockingQueue
+  LinkedBlockingDeque
+  LinkedBlockingQueue
+the auto-expansion when capacity is exceeded will not happen AND exception may be thrown.
+  Deque<Integer> deque = new LinkedBlockingDeque<>(2); // capacity = 2
+  deque.addFirst(1);
+  deque.addLast(2);
+  deque.addLast(3); // 🚫 throws IllegalStateException: Deque full
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds an element to the collection. In a Deque, typically adds at the tail.
+- boolean remove(Object o) - Removes a single instance of the specified element, if it exists.
+- boolean contains(Object o) - Returns true if the element exists in the collection.
+- int size() - Returns the number of elements in the deque.
+- boolean isEmpty() - Returns true if the deque contains no elements.
+- void clear() - Removes all elements.
+- Iterator<E> iterator() - Returns an iterator over the elements (head to tail).
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the array passed.
+- boolean containsAll(Collection<?> c) - Returns true if all elements in the given collection exist in this one.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection.
+- boolean removeAll(Collection<?> c) - Removes all elements that are in the specified collection.
+- boolean retainAll(Collection<?> c) - Retains only the elements that are also in the specified collection.
+
+Inherited from Queue<E>:
+- boolean offer(E e) - Inserts element at the tail if possible; returns true or false.
+- E remove() - Retrieves and removes the head. Throws exception if empty.
+- E poll() - Retrieves and removes the head, or null if empty.
+- E element() - Retrieves, but does not remove, the head. Throws exception if empty.
+- E peek() - Retrieves, but does not remove, the head, or null if empty.
+
+Methods Unique to Deque<E>:
+✅ Insertion Methods
+- void addFirst(E e) - Inserts element at the front. Throws if no space.
+- void addLast(E e) - Inserts element at the end. Throws if no space.
+- boolean offerFirst(E e) - Attempts to insert at the front; returns true or false.
+- boolean offerLast(E e) - Attempts to insert at the end; returns true or false.
+❌ Removal Methods
+- E removeFirst() - Removes and returns the first element. Throws if empty.
+- E removeLast() - Removes and returns the last element. Throws if empty.
+- E pollFirst() - Removes and returns the first element, or null if empty.
+- E pollLast() - Removes and returns the last element, or null if empty.
+👀 Peek Methods
+- E getFirst() - Retrieves, but does not remove, the first element. Throws if empty.
+- E getLast() - Retrieves, but does not remove, the last element. Throws if empty.
+- E peekFirst() - Retrieves, but does not remove, the first element, or null if empty.
+- E peekLast() - Retrieves, but does not remove, the last element, or null if empty.
+🧽 Stack-like Methods
+- void push(E e) - Pushes element onto the stack (equivalent to addFirst).
+- E pop() - Pops element from the stack (equivalent to removeFirst).
+🔍 Miscellaneous
+- boolean removeFirstOccurrence(Object o) - Removes the first occurrence of the specified element.
+- boolean removeLastOccurrence(Object o) - Removes the last occurrence of the specified element.
+- Iterator<E> descendingIterator() - Returns an iterator over the elements in reverse (tail to head).
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
  */
 public class Main {
     public static void main(String[] args) {
