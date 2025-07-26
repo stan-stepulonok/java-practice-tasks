@@ -638,6 +638,101 @@ Unique methods of SortedSet:
 - SortedSet<E> tailSet(E fromElement) - Returns a view of the portion of this set whose elements are greater than or equal to fromElement.
 - E first() - Returns the first (lowest) element in the set.
 - E last() - Returns the last (highest) element in the set.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ NavigableSet<E> interface ------------------------------------------------------------------
+Description:
+- NavigableSet is a subinterface of SortedSet
+- a sorted set with navigation methods for retrieving the closest matches for given search targets
+- Traverse the set in ascending or descending order,
+- Access elements just lower, floor, ceiling, or just higher than a given element,
+- Retrieve and remove the first or last element,
+- Get views of portions of the set.
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection that aren't already in the set.
+- void clear() - Removes all elements from the set.
+- boolean contains(Object o) - Returns true if the set contains the specified element.
+- boolean containsAll(Collection<?> c) - Returns true if the set contains all elements from the given collection.
+- boolean isEmpty() - Returns true if the set contains no elements.
+- Iterator<E> iterator() - Returns an iterator over the elements in the set.
+- boolean remove(Object o) - Removes the specified element if it exists in the set.
+- boolean removeAll(Collection<?> c) - Removes all elements in the given collection from this set.
+- boolean retainAll(Collection<?> c) - Retains only elements that are also in the given collection (intersection).
+- int size() - Returns the number of elements in the set.
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the specified array containing all elements.
+
+Inherited from Set<E>:
+none
+
+Inherited from SortedSet:
+- Comparator<? super E> comparator() - Returns the comparator used to order the elements in this set, or null if natural ordering is used.
+- SortedSet<E> subSet(E fromElement, E toElement) - Returns a view of the portion of this set from fromElement (inclusive) to toElement (exclusive).
+- SortedSet<E> headSet(E toElement) - Returns a view of the portion of this set whose elements are strictly less than toElement.
+- SortedSet<E> tailSet(E fromElement) - Returns a view of the portion of this set whose elements are greater than or equal to fromElement.
+- E first() - Returns the first (lowest) element in the set.
+- E last() - Returns the last (highest) element in the set.
+
+Unique methods of NavigableSet:
+- E lower(E e) - Returns the greatest element strictly less than the given element, or null if none.
+- E floor(E e) - Returns the greatest element less than or equal to the given element, or null.
+- E ceiling(E e) - Returns the least element greater than or equal to the given element, or null.
+- E higher(E e) - Returns the least element strictly greater than the given element, or null.
+- E pollFirst() - Retrieves and removes the first (lowest) element, or returns null if the set is empty.
+- E pollLast() - Retrieves and removes the last (highest) element, or returns null if the set is empty.
+- NavigableSet<E> descendingSet() - Returns a reverse-order view of the elements.
+- Iterator<E> descendingIterator() - Returns an iterator over the elements in descending order.
+- NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) - Returns a view of the portion of this set from fromElement to toElement, with control over inclusivity.
+- NavigableSet<E> headSet(E toElement, boolean inclusive) - Returns a view of the portion of this set whose elements are less than (or equal to if inclusive) toElement.
+- NavigableSet<E> tailSet(E fromElement, boolean inclusive) - Returns a view of the portion of this set whose elements are greater than (or equal to if inclusive) fromElement.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ TreeSet<E> class ------------------------------------------------------------------
+Description:
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection that aren't already in the set.
+- void clear() - Removes all elements from the set.
+- boolean contains(Object o) - Returns true if the set contains the specified element.
+- boolean containsAll(Collection<?> c) - Returns true if the set contains all elements from the given collection.
+- boolean isEmpty() - Returns true if the set contains no elements.
+- Iterator<E> iterator() - Returns an iterator over the elements in the set.
+- boolean remove(Object o) - Removes the specified element if it exists in the set.
+- boolean removeAll(Collection<?> c) - Removes all elements in the given collection from this set.
+- boolean retainAll(Collection<?> c) - Retains only elements that are also in the given collection (intersection).
+- int size() - Returns the number of elements in the set.
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the specified array containing all elements.
+
+Inherited from Set<E>:
+none
+
+Inherited from SortedSet<E>:
+- Comparator<? super E> comparator() - Returns the comparator used to order the elements in this set, or null if natural ordering is used.
+- SortedSet<E> subSet(E fromElement, E toElement) - Returns a view of the portion of this set from fromElement (inclusive) to toElement (exclusive).
+- SortedSet<E> headSet(E toElement) - Returns a view of the portion of this set whose elements are strictly less than toElement.
+- SortedSet<E> tailSet(E fromElement) - Returns a view of the portion of this set whose elements are greater than or equal to fromElement.
+- E first() - Returns the first (lowest) element in the set.
+- E last() - Returns the last (highest) element in the set.
+
+Unique Methods of TreeSet:
+E ceiling(E e) - Returns the least element ≥ e, or null if none.
+E floor(E e) - Returns the greatest element ≤ e, or null if none.
+E higher(E e) - Returns the least element > e, or null if none.
+E lower(E e) - Returns the greatest element < e, or null if none.
+E pollFirst() - Retrieves and removes the first element, or null if empty.
+E pollLast() - Retrieves and removes the last element, or null if empty.
+NavigableSet<E> descendingSet() - Returns a reverse-order view of the elements.
+Iterator<E> descendingIterator() - Returns a reverse-order iterator.
+NavigableSet<E> headSet(E toElement, boolean inclusive) - Returns a view of elements less than (or equal to, if inclusive) toElement.
+NavigableSet<E> tailSet(E fromElement, boolean inclusive) - Returns a view of elements ≥ (or > if inclusive is false) fromElement.
+NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) - Returns a view of elements in the given range with inclusive/exclusive bounds.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  */
 public class Main {
