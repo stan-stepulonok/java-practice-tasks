@@ -511,6 +511,134 @@ Methods:
 see Deque<E> interface
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ Set<E> interface ------------------------------------------------------------------
+Description:
+- a collection of unique elements, i.e., no duplicates allowed.
+- does not guarantee insertion order (e.g., HashSet) or sorted order (e.g., TreeSet)—that depends on the specific implementation.
+- Positional Access	is not supported (like in the list)
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection that aren't already in the set.
+- void clear() - Removes all elements from the set.
+- boolean contains(Object o) - Returns true if the set contains the specified element.
+- boolean containsAll(Collection<?> c) - Returns true if the set contains all elements from the given collection.
+- boolean isEmpty() - Returns true if the set contains no elements.
+- Iterator<E> iterator() - Returns an iterator over the elements in the set.
+- boolean remove(Object o) - Removes the specified element if it exists in the set.
+- boolean removeAll(Collection<?> c) - Removes all elements in the given collection from this set.
+- boolean retainAll(Collection<?> c) - Retains only elements that are also in the given collection (intersection).
+- int size() - Returns the number of elements in the set.
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the specified array containing all elements.
+
+Unique Methods in Set:
+none, see implementations
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ HashSet<E> class ------------------------------------------------------------------
+Description:
+- uses a hash table for storage (actually, a HashMap under the hood)
+- stores unique elements only, meaning it does not allow duplicates
+- allows null elements (only one null)
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection that aren't already in the set.
+- void clear() - Removes all elements from the set.
+- boolean contains(Object o) - Returns true if the set contains the specified element.
+- boolean containsAll(Collection<?> c) - Returns true if the set contains all elements from the given collection.
+- boolean isEmpty() - Returns true if the set contains no elements.
+- Iterator<E> iterator() - Returns an iterator over the elements in the set.
+- boolean remove(Object o) - Removes the specified element if it exists in the set.
+- boolean removeAll(Collection<?> c) - Removes all elements in the given collection from this set.
+- boolean retainAll(Collection<?> c) - Retains only elements that are also in the given collection (intersection).
+- int size() - Returns the number of elements in the set.
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the specified array containing all elements.
+
+Inherited from Set<E>:
+none
+
+Unique methods of HashSet:
+none
+
+Constructors:
+- HashSet() - Constructs a new, empty set; the backing HashMap has default initial capacity (16) and load factor (0.75).
+- HashSet(int initialCapacity) - Constructs a new, empty set with the specified initial capacity.
+- HashSet(int initialCapacity, float loadFactor) - Constructs a new, empty set with the specified initial capacity and load factor.
+- HashSet(Collection<? extends E> c) - Constructs a new set containing the elements in the specified collection.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ LinkedHashSet<E> class ------------------------------------------------------------------
+Description:
+- combines hash table and linked list implementations
+- it inherits from HashSet
+- no duplicates-
+- constant-time basic operations (slightly slower than HashSet)
+- maintains insertion order using a doubly-linked list !!!!
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection that aren't already in the set.
+- void clear() - Removes all elements from the set.
+- boolean contains(Object o) - Returns true if the set contains the specified element.
+- boolean containsAll(Collection<?> c) - Returns true if the set contains all elements from the given collection.
+- boolean isEmpty() - Returns true if the set contains no elements.
+- Iterator<E> iterator() - Returns an iterator over the elements in the set.
+- boolean remove(Object o) - Removes the specified element if it exists in the set.
+- boolean removeAll(Collection<?> c) - Removes all elements in the given collection from this set.
+- boolean retainAll(Collection<?> c) - Retains only elements that are also in the given collection (intersection).
+- int size() - Returns the number of elements in the set.
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the specified array containing all elements.
+
+Inherited from Set<E>:
+none
+
+Unique methods of LinkedHashSet:
+none
+
+Constructors:
+- LinkedHashSet() - Constructs a new, empty set with default capacity and load factor.
+- LinkedHashSet(int initialCapacity) - Constructs a new, empty set with the specified initial capacity.
+- LinkedHashSet(int initialCapacity, float loadFactor) - Constructs a new, empty set with the specified initial capacity and load factor.
+- LinkedHashSet(Collection<? extends E> c) - Constructs a new set containing the elements in the specified collection, in the order they are returned by the collection’s iterator.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ SortedSet<E> interface ------------------------------------------------------------------
+Description:
+- maintains its elements in ascending order according to the natural ordering of its elements
+- or according to a custom Comparator provided at the time of set creation.
+- No duplicate elements
+- Navigational access to elements like first, last, headSet, etc.
+
+Inherited from Collection<E>:
+- boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
+- boolean addAll(Collection<? extends E> c) - Adds all elements from the specified collection that aren't already in the set.
+- void clear() - Removes all elements from the set.
+- boolean contains(Object o) - Returns true if the set contains the specified element.
+- boolean containsAll(Collection<?> c) - Returns true if the set contains all elements from the given collection.
+- boolean isEmpty() - Returns true if the set contains no elements.
+- Iterator<E> iterator() - Returns an iterator over the elements in the set.
+- boolean remove(Object o) - Removes the specified element if it exists in the set.
+- boolean removeAll(Collection<?> c) - Removes all elements in the given collection from this set.
+- boolean retainAll(Collection<?> c) - Retains only elements that are also in the given collection (intersection).
+- int size() - Returns the number of elements in the set.
+- Object[] toArray() - Returns an array containing all elements.
+- <T> T[] toArray(T[] a) - Returns an array of the runtime type of the specified array containing all elements.
+
+Inherited from Set<E>:
+none
+
+Unique methods of SortedSet:
+- Comparator<? super E> comparator() - Returns the comparator used to order the elements in this set, or null if natural ordering is used.
+- SortedSet<E> subSet(E fromElement, E toElement) - Returns a view of the portion of this set from fromElement (inclusive) to toElement (exclusive).
+- SortedSet<E> headSet(E toElement) - Returns a view of the portion of this set whose elements are strictly less than toElement.
+- SortedSet<E> tailSet(E fromElement) - Returns a view of the portion of this set whose elements are greater than or equal to fromElement.
+- E first() - Returns the first (lowest) element in the set.
+- E last() - Returns the last (highest) element in the set.
+
  */
 public class Main {
     public static void main(String[] args) {
