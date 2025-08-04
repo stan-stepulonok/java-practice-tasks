@@ -692,6 +692,13 @@ Unique methods of NavigableSet:
 
 ------------------------------------------------------------------ TreeSet<E> class ------------------------------------------------------------------
 Description:
+- TreeSet<E> is a generic, sorted, and navigable set implementation in Java based on a self-balancing Red-Black tree.
+- It implements the NavigableSet interface (which extends SortedSet and Set).
+- Elements are automatically sorted in natural order (e.g., Comparable) or by a custom Comparator provided at construction.
+- Duplicates are not allowed.
+- Null elements are not allowed (in contrast to HashSet, which allows one null).
+- Feature	                      TreeSet	HashSet	 LinkedHashSet
+  Performance (add/search/remove) O(log n)  O(1)     O(1)
 
 Inherited from Collection<E>:
 - boolean add(E e) - Adds the specified element if it's not already present. Returns true if the set changed as a result.
@@ -719,19 +726,22 @@ Inherited from SortedSet<E>:
 - E first() - Returns the first (lowest) element in the set.
 - E last() - Returns the last (highest) element in the set.
 
-Unique Methods of TreeSet:
-E ceiling(E e) - Returns the least element ≥ e, or null if none.
-E floor(E e) - Returns the greatest element ≤ e, or null if none.
-E higher(E e) - Returns the least element > e, or null if none.
-E lower(E e) - Returns the greatest element < e, or null if none.
-E pollFirst() - Retrieves and removes the first element, or null if empty.
-E pollLast() - Retrieves and removes the last element, or null if empty.
-NavigableSet<E> descendingSet() - Returns a reverse-order view of the elements.
-Iterator<E> descendingIterator() - Returns a reverse-order iterator.
-NavigableSet<E> headSet(E toElement, boolean inclusive) - Returns a view of elements less than (or equal to, if inclusive) toElement.
-NavigableSet<E> tailSet(E fromElement, boolean inclusive) - Returns a view of elements ≥ (or > if inclusive is false) fromElement.
-NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) - Returns a view of elements in the given range with inclusive/exclusive bounds.
+Inherited from NavigableSet Interface
+- E lower(E e) - Returns the greatest element strictly less than the given element, or null if none.
+- E floor(E e) - Returns the greatest element less than or equal to the given element, or null.
+- E ceiling(E e) - Returns the least element greater than or equal to the given element, or null.
+- E higher(E e) - Returns the least element strictly greater than the given element, or null.
+- E pollFirst() - Retrieves and removes the first (lowest) element, or returns null if the set is empty.
+- E pollLast() - Retrieves and removes the last (highest) element, or returns null if the set is empty.
+- NavigableSet<E> descendingSet() - Returns a reverse-order view of the elements.
+- Iterator<E> descendingIterator() - Returns an iterator over the elements in descending order.
+- NavigableSet<E> subSet(E fromElement, boolean fromInclusive, E toElement, boolean toInclusive) - Returns a view of the portion of this set from fromElement to toElement, with control over inclusivity.
+- NavigableSet<E> headSet(E toElement, boolean inclusive) - Returns a view of the portion of this set whose elements are less than (or equal to if inclusive) toElement.
+- NavigableSet<E> tailSet(E fromElement, boolean inclusive) - Returns a view of the portion of this set whose elements are greater than (or equal to if inclusive) fromElement.
 
+Unique Methods of TreeSet:
+- Object clone() - Returns a shallow copy of this TreeSet.
+- Spliterator<E> spliterator() - Returns a late-binding and fail-fast Spliterator for traversing elements.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  */
