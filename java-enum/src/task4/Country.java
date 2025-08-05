@@ -2,7 +2,7 @@ package task4;
 
 public enum Country {
 
-    COOUNTRY_A(1000, "ABC"), COUNTRY_B(2000, "DEF"), COUNTRY_C(3000, "GHI");
+    COUNTRY_A(1000, "ABC"), COUNTRY_B(2000, "DEF"), COUNTRY_C(3000, "GHI");
 
     private long population = 0;
     private String currency = "";
