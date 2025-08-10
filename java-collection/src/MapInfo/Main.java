@@ -89,8 +89,46 @@ interface Map.Entry<K, V> {
     boolean equals(Object o);
     int hashCode();
 }
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------ 2.1 HashMap<K, V> class ------------------------------------------------------------------
+Description:
+- implementation of the Map interface
+- uses a hash table as its underlying data structure, allowing for fast insertion, retrieval, and deletion operations O(1)
+- permits one null key
+- does not guarantee any ordering
+- uses hashCode() and equals() methods of keys to organize entries
+
+Methods inherited from Map interface:
+- V put(K key, V value); - Associates the specified value with the specified key in this map. If the map previously contained a mapping for the key, the old value is replaced and returned.
+- V get(Object key); - Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+- V remove(Object key); - Removes the mapping for the specified key if present. Returns the previous value associated with the key or null if there was no mapping.
+- boolean containsKey(Object key); - Returns true if this map contains a mapping for the specified key.
+- boolean containsValue(Object value); - Returns true if this map maps one or more keys to the specified value.
+- void putAll(Map<? extends K, ? extends V> m); - Copies all of the mappings from the specified map to this map.
+- oid clear(); - Removes all of the mappings from this map.
+- int size(); - Returns the number of key-value mappings in this map.
+- boolean isEmpty(); - Returns true if this map contains no key-value mappings.
+- Set<K> keySet(); - Returns a Set view of the keys contained in this map.
+- Collection<V> values(); - Returns a Collection view of the values contained in this map.
+- Set<Map.Entry<K, V>> entrySet(); - Returns a Set view of the mappings contained in this map.
+
+Unique Methods of HashMap:
+- HashMap(); - Constructor. Creates a new, empty HashMap with the default initial capacity (16) and load factor (0.75).
+- HashMap(int initialCapacity); - Constructor. Creates a new, empty HashMap with the specified initial capacity and default load factor.
+- HashMap(int initialCapacity, float loadFactor); - Constructor. Creates a new, empty HashMap with the specified initial capacity and load factor.
+- HashMap(Map<? extends K, ? extends V> m); - Constructor. Creates a new HashMap with the same mappings as the specified map.
+- V getOrDefault(Object key, V defaultValue); - Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.
+- V putIfAbsent(K key, V value); - If the specified key is not already associated with a value (or is mapped to null), associates it with the given value and returns null; otherwise, returns the current value.
+- boolean remove(Object key, Object value); - Removes the entry for the specified key only if it is currently mapped to the specified value. Returns true if removed.
+- boolean replace(K key, V oldValue, V newValue); - Replaces the entry for the specified key only if currently mapped to the specified value. Returns true if replaced.
+- V replace(K key, V value); - Replaces the entry for the specified key only if it is currently mapped to some value. Returns the previous value or null if no mapping existed.
+- void forEach(BiConsumer<? super K, ? super V> action); - Performs the given action for each entry in the map until all entries have been processed or the action throws an exception.
+- void replaceAll(BiFunction<? super K, ? super V, ? extends V> function); - Replaces each entry’s value with the result of applying the given function to that entry until all entries have been processed or the function throws an exception.
+- putAll(Map<? extends K, ? extends V> m) - convenience method to copy all mappings from another map into the current map. If the current map already has a key, it replaces the value. If m is null, it throws a NullPointerException.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 */
 
