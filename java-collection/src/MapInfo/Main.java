@@ -74,6 +74,15 @@ Default and Optional Methods (since Java 8+)
 - boolean replace(K key, V oldValue, V newValue) - Replaces the entry for the specified key only if currently mapped to the specified value.
 - V replace(K key, V value) - Replaces the entry for the specified key only if it is currently mapped to some value.
 
+Map.of(...) is a static factory method added in Java 9 to quickly create a small, immutable map without having to write boilerplate new HashMap<>() + put() calls.
+// No entries
+static <K, V> Map<K, V> of()
+// One entry
+static <K, V> Map<K, V> of(K k1, V v1)
+// Two entries
+static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2)
+
+
 Map.Entry Interface (Inner Interface for entries)
 
 - Represents a key-value pair inside the map.
@@ -128,6 +137,58 @@ Unique Methods of HashMap:
 - putAll(Map<? extends K, ? extends V> m) - convenience method to copy all mappings from another map into the current map. If the current map already has a key, it replaces the value. If m is null, it throws a NullPointerException.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ 3.1 LinkedHashMap ------------------------------------------------------------------
+Description:
+- Extends HashMap
+- Guarantees insertion order
+
+Unique methods:
+- protected boolean removeEldestEntry(Map.Entry<K,V> eldest)
+Lets you decide whether to remove the eldest entry each time a new one is inserted.
+
+protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
+    return false;
+}
+
+Should be overriden:
+LinkedHashMap<Integer, String> map = new LinkedHashMap<>() {
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<Integer, String> eldest) {
+        return size() > 2;
+    }
+};
+
+Map.Entry<Integer, String> eldest -> represents the eldest entry in the map at the time removeEldestEntry() is called:
+- If the map is insertion-ordered → the first element you inserted that is still in the map.
+- If the map is access-ordered (created with the special constructor) → the least recently accessed entry.
+You do not fetch it yourself — the LinkedHashMap internals hand it to your overridden method.
+
+Insertion-ordered LinkedHashMap (default):
+- new LinkedHashMap<>();
+- new LinkedHashMap<>(initialCapacity, loadFactor, false);
+
+Access-ordered LinkedHashMap:
+Entries are iterated in the order of most recently accessed last.
+"Access" means either calling get(key) or inserting/updating a key.
+- new LinkedHashMap<>(16, 0.75f, true);
+
+LinkedHashMap<Integer, String> map = new LinkedHashMap<>(16, 0.75f, true);
+map.put(1, "One");
+map.put(2, "Two");
+map.put(3, "Three");
+
+System.out.println(map.keySet());
+// Output: [1, 2, 3]
+
+map.get(1); // access key 1
+System.out.println(map.keySet());
+// Output: [2, 3, 1]  — key 1 moved to the end
+
+map.put(2, "Two updated"); // access via put()
+System.out.println(map.keySet());
+// Output: [3, 1, 2] — key 2 now at end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 */
