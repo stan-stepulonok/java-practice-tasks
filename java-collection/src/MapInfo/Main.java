@@ -190,6 +190,18 @@ System.out.println(map.keySet());
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ 2.2 EnumMap ------------------------------------------------------------------
+Description:
+- EnumMap<K extends Enum<K>, V> is a specialized implementation of the Map interface for use with enum type keys.
+- Keys must be of a single enum type, specified at map creation.
+- Maintains natural order of the enum keys (the order in which enum constants are declared).
+
+Unique methods - Constructors:
+!!! The keyType parameter is the Class object of the enum type used as keys. !!!
+- EnumMap(Class<K> keyType) - Constructs a new, empty enum map with the specified key type.
+- EnumMap(EnumMap<K, ? extends V> m) - Constructs a new enum map with the same key type as the specified enum map, initially containing the same mappings.
+- EnumMap(Map<K, ? extends V> m) - Constructs a new enum map initialized from the specified map. The key type is inferred from the keys in the map.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 */
 
