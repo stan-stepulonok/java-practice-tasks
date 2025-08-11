@@ -203,6 +203,20 @@ Unique methods - Constructors:
 - EnumMap(Map<K, ? extends V> m) - Constructs a new enum map initialized from the specified map. The key type is inferred from the keys in the map.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ SortedMap<K,V> interface ------------------------------------------------------------------
+Description:
+- maintains entries in ascending order of keys according to their natural ordering (if keys implement Comparable) or a specified Comparator.
+
+Unique Methods of SortedMap
+- Comparator<? super K> comparator() - Returns the comparator used to order the keys in the map, or null if natural ordering is used.
+- SortedMap<K, V> subMap(K fromKey, K toKey) - Returns a view of the portion of this map whose keys range from fromKey (inclusive) to toKey (exclusive).
+- SortedMap<K, V> headMap(K toKey) - Returns a view of the portion of this map whose keys are strictly less than toKey.
+- SortedMap<K, V> tailMap(K fromKey) - Returns a view of the portion of this map whose keys are greater than or equal to fromKey.
+- K firstKey() - Returns the first (lowest) key in the map.
+- K lastKey() - Returns the last (highest) key in the map.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 */
 
 
