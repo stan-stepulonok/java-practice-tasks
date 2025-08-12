@@ -214,7 +214,33 @@ Unique Methods of SortedMap
 - SortedMap<K, V> tailMap(K fromKey) - Returns a view of the portion of this map whose keys are greater than or equal to fromKey.
 - K firstKey() - Returns the first (lowest) key in the map.
 - K lastKey() - Returns the last (highest) key in the map.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+------------------------------------------------------------------ NavigableMap<K,V> interface ------------------------------------------------------------------
+Description:
+- Keys are maintained in sorted order (natural ordering or via a custom Comparator).
+- Provides range view methods for working with sub-maps.
+- Supports reverse order views.
+
+Unique methods of NavigableMap<K,V>
+- Map.Entry<K,V> lowerEntry(K key) - Returns the entry with the greatest key strictly less than the given key, or null if none.
+- K lowerKey(K key) - Returns the greatest key strictly less than the given key, or null if none.
+- Map.Entry<K,V> floorEntry(K key) - Returns the entry with the greatest key less than or equal to the given key.
+- K floorKey(K key) - Returns the greatest key less than or equal to the given key.
+- Map.Entry<K,V> ceilingEntry(K key) - Returns the entry with the smallest key greater than or equal to the given key.
+- K ceilingKey(K key) - Returns the smallest key greater than or equal to the given key.
+- Map.Entry<K,V> higherEntry(K key) - Returns the entry with the smallest key strictly greater than the given key.
+- K higherKey(K key) - Returns the smallest key strictly greater than the given key.
+- Map.Entry<K,V> firstEntry() - Returns the entry with the lowest key.
+- Map.Entry<K,V> lastEntry() - Returns the entry with the highest key.
+- Map.Entry<K,V> pollFirstEntry() - Removes and returns the entry with the lowest key.
+- Map.Entry<K,V> pollLastEntry() - Removes and returns the entry with the highest key.
+- NavigableMap<K,V> descendingMap() - Returns a reverse-order view of the map.
+- NavigableSet<K> navigableKeySet() - Returns a NavigableSet view of the keys in ascending order.
+- NavigableSet<K> descendingKeySet() - Returns a NavigableSet view of the keys in descending order.
+- NavigableMap<K,V> subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) - Returns a view of the portion of the map between fromKey and toKey with inclusivity control.
+- NavigableMap<K,V> headMap(K toKey, boolean inclusive) - Returns a view of the portion of the map whose keys are less than (or equal to if inclusive) toKey.
+- NavigableMap<K,V> tailMap(K fromKey, boolean inclusive) - Returns a view of the portion of the map whose keys are greater than (or equal to if inclusive) fromKey.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 */
